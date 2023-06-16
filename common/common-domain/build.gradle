@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.vosiievska'
+version = '1.0'
+
+ext {
+    projectlombokVersion = '1.18.24'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.projectlombok:lombok:${projectlombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${projectlombokVersion}"
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

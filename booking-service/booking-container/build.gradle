@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.vosiievska'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':booking-service:booking-domain:booking-app-service')
+    implementation project(':booking-service:booking-domain:booking-domain-core')
+    implementation project(':booking-service:booking-application')
+    implementation project(':booking-service:booking-data-access')
+    implementation project(':booking-service:booking-messaging')
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

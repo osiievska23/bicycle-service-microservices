@@ -1,0 +1,13 @@
+rootProject.name = 'bicycle-service-microservices'
+
+include 'common'
+include 'common:common-domain'
+
+include 'booking-service'
+include 'booking-service:booking-domain'
+include 'booking-service:booking-application'
+include 'booking-service:booking-data-access'
+include 'booking-service:booking-messaging'
+include 'booking-service:booking-container'
+include 'booking-service:booking-domain:booking-domain-core'
+include 'booking-service:booking-domain:booking-app-service'
