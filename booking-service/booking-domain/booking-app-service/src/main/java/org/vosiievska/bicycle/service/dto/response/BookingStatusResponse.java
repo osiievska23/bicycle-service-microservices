@@ -14,7 +14,7 @@ import java.util.List;
 public class BookingStatusResponse {
 
   @NotNull
-  BookingStatus status;
+  BookingStatus currentStatus;
   @NotNull
   Instant updatedAt;
   List<String> failureMessages;

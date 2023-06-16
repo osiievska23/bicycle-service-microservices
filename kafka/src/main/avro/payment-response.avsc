@@ -18,7 +18,7 @@
       }
     },
     {
-      "name": "clientId",
+      "name": "customerId",
       "type": {
         "type": "string",
         "logicalType": "uuid"

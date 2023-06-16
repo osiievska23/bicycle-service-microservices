@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.entity.AggregateRoot;
 import org.vosiievska.bicycle.service.domain.valueobject.Address;
-import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
+import org.vosiievska.bicycle.service.domain.valueobject.CustomerId;
 import org.vosiievska.bicycle.service.valueobject.UserPersonalInfo;
 
 import java.util.UUID;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Client extends AggregateRoot<ClientId> {
+public class Client extends AggregateRoot<CustomerId> {
 
   final UserPersonalInfo clientInfo;
   final Address address;

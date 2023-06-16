@@ -1,6 +1,7 @@
 package org.vosiievska.bicycle.service.entity;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
@@ -14,6 +15,7 @@ import org.vosiievska.bicycle.service.exception.BookingDomainException;
  */
 @Getter
 @Builder
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RepairService extends Entity<RepairServiceId> {
 

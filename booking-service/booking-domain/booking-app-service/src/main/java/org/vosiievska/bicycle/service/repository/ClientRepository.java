@@ -1,6 +1,6 @@
 package org.vosiievska.bicycle.service.repository;
 
-import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
+import org.vosiievska.bicycle.service.domain.valueobject.CustomerId;
 import org.vosiievska.bicycle.service.entity.Client;
 
 import java.util.Optional;
@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public interface ClientRepository {
 
-  Optional<Client> findById(ClientId clientId);
+  Optional<Client> findById(CustomerId customerId);
 
-  boolean existsById(ClientId clientId);
+  boolean existsById(CustomerId customerId);
 }

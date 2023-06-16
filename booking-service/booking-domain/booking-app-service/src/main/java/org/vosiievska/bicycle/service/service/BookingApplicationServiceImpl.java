@@ -5,8 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.vosiievska.bicycle.service.BookingDomainService;
+import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
-import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
+import org.vosiievska.bicycle.service.domain.valueobject.CustomerId;
 import org.vosiievska.bicycle.service.domain.valueobject.RepairServiceId;
 import org.vosiievska.bicycle.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.dto.request.DeclineBookingRequest;
@@ -39,7 +40,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
 
   @Override
   public BookingCreatedEvent createBooking(CreateBookingRequest request) {
-    checkClientExistenceById(request.getClientId());
+    checkClientExistenceById(request.getCustomerId());
     Workshop workshop = getAvailableWorkshop();
     RepairService repairService = getRepairServiceById(request.getRepairServiceId());
 
@@ -48,7 +49,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
     Booking savedBooking = saveBooking(validatedBooking);
     workshopRepository.makeSpecialistBusyById(savedBooking.getSpecialistId());
 
-    log.info("New Booking with id '{}' created by client id '{}'", savedBooking.getIdValue(), request.getClientId());
+    log.info("New booking with id '{}' created by client id '{}'", savedBooking.getIdValue(), request.getCustomerId());
     return new BookingCreatedEvent(savedBooking);
   }
 
@@ -61,23 +62,23 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   public BookingStatusResponse getBookingStatus(BookingId bookingId) {
     log.info("Get booking status by id: {}", bookingId);
     return bookingRepository.findBookingStatusById(bookingId)
-        .orElseThrow(() -> new BookingDomainException("Could not get booking status"));
+        .orElseThrow(() -> new EntityNotFoundException("Booking status by id: %s not found", bookingId));
   }
 
   private Workshop getAvailableWorkshop() {
     return workshopRepository.findAvailableWorkshopWithAvailableSpecialist()
-        .orElseThrow(() -> new BookingDomainException("Available workshop not found"));
+        .orElseThrow(() -> new EntityNotFoundException("Available workshop not found"));
   }
 
-  private void checkClientExistenceById(UUID clientId) {
-    if (!clientRepository.existsById(new ClientId(clientId))) {
+  private void checkClientExistenceById(UUID customerId) {
+    if (!clientRepository.existsById(new CustomerId(customerId))) {
       throw new BookingDomainException("Client with id '%s' not found");
     }
   }
 
   private RepairService getRepairServiceById(String repairServiceId) {
     return repairServiceRepository.findById(new RepairServiceId(repairServiceId))
-        .orElseThrow(() -> new BookingDomainException("Repair service by id '%s' not found", repairServiceId));
+        .orElseThrow(() -> new EntityNotFoundException("Repair service by id '%s' not found", repairServiceId));
   }
 
   private Booking saveBooking(Booking newBooking) {

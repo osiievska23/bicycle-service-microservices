@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.6'
 }
 
 group = 'org.vosiievska'

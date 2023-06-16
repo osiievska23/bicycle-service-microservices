@@ -1,16 +1,13 @@
 plugins {
     id 'java'
-//    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 group = 'org.vosiievska'
 version = '1.0-SNAPSHOT'
 
 ext {
-    springBootVersion = '3.0.6'
     springVersion = '6.0.9'
     projectlombokVersion = '1.18.24'
-    slf4jVersion = '2.0.7'
     mapstructVersion = '1.5.5.Final'
 }
 
@@ -26,7 +23,6 @@ dependencies {
     implementation "org.springframework:spring-tx:${springVersion}"
 
     implementation "org.projectlombok:lombok:${projectlombokVersion}"
-    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 
     annotationProcessor "org.projectlombok:lombok:${projectlombokVersion}"

@@ -30,7 +30,7 @@ public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
   }
 
   @Override
-  public BookingStatusResponse cancelBooking(DeclineBookingRequest request) {
+  public BookingStatusResponse declineBooking(DeclineBookingRequest request) {
     return null;
   }
 

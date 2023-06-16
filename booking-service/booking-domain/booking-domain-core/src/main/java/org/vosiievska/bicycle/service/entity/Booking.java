@@ -9,7 +9,7 @@ import org.vosiievska.bicycle.service.domain.entity.AggregateRoot;
 import org.vosiievska.bicycle.service.domain.valueobject.Address;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingStatus;
-import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
+import org.vosiievska.bicycle.service.domain.valueobject.CustomerId;
 import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;
 import org.vosiievska.bicycle.service.exception.BookingDomainException;
@@ -26,8 +26,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Booking extends AggregateRoot<BookingId> {
 
-  final BookingId id;
-  final ClientId clientId;
+  final CustomerId customerId;
   final WorkshopId workshopId;
   final SpecialistId specialistId;
   final RepairService repairService;

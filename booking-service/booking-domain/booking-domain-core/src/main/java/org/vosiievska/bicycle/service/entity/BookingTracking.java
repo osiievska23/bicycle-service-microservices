@@ -18,7 +18,7 @@ public class BookingTracking extends Entity<BookingTrackingId> { //todo: delete
   final Instant updatedAt;
 
   public BookingTracking(BookingTrackingId id, BookingStatus status, Instant updatedAt) {
-    super(id);
+    super.setId(id);
     this.status = status;
     this.updatedAt = updatedAt;
   }

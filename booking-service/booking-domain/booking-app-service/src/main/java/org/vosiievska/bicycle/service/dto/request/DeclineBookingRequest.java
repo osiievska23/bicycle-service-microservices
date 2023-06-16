@@ -14,5 +14,7 @@ import java.util.UUID;
 public class DeclineBookingRequest {
 
   @NotNull
-  UUID bookingTrackingId;
+  UUID bookingId;
+  @NotNull
+  UUID customerId;
 }

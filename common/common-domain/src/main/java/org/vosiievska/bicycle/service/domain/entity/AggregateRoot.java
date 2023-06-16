@@ -7,7 +7,7 @@ import org.vosiievska.bicycle.service.domain.valueobject.BaseId;
  * @param <ID> unique immutable identifier
  */
 public abstract class AggregateRoot<ID extends BaseId<?>> extends Entity<ID> {
-  public AggregateRoot(ID id) {
-    super(id);
-  }
+//  public AggregateRoot(ID id) {
+//    super.setId(id);
+//  }
 }

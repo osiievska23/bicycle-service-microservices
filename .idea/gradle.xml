@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/booking-service/booking-messaging" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/common/common-domain" />
+            <option value="$PROJECT_DIR$/kafka" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -9,7 +9,7 @@ public interface BookingApplicationFacade {
 
   BookingStatusResponse createBooking(CreateBookingRequest request);
 
-  BookingStatusResponse cancelBooking(DeclineBookingRequest request);
+  BookingStatusResponse declineBooking(DeclineBookingRequest bookingId);
 
   BookingStatusResponse getBookingStatusById(BookingId bookingId);
 

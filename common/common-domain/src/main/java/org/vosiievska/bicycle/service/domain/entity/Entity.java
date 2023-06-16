@@ -1,6 +1,5 @@
 package org.vosiievska.bicycle.service.domain.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +19,9 @@ import org.vosiievska.bicycle.service.domain.valueobject.BaseId;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @EqualsAndHashCode
 public abstract class Entity<ID extends BaseId<?>> {
 
   private ID id;
-
 
 }
