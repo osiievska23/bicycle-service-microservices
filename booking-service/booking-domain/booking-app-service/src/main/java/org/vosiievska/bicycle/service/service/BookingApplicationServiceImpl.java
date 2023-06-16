@@ -25,7 +25,6 @@ import org.vosiievska.bicycle.service.repository.ClientRepository;
 import org.vosiievska.bicycle.service.repository.RepairServiceRepository;
 import org.vosiievska.bicycle.service.repository.WorkshopRepository;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
