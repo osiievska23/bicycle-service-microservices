@@ -1,0 +1,57 @@
+{
+  "namespace": "com.bicycle.service.avro.payment",
+  "type": "record",
+  "name": "AvroRestaurantApprovalRequest",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "sagaId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "workshopId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "bookingId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "repairServiceId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "local-timestamp-millis"
+      }
+    },
+    {
+      "name": "workshopResponseStatus",
+      "type": {
+        "type": "enum",
+        "name": "WorkshopResponseStatus",
+        "symbols": ["APPROVED", "DECLINED"]
+      }
+    }
+  ]
+}

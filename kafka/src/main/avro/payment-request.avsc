@@ -1,0 +1,59 @@
+{
+    "namespace": "com.bicycle.service.avro.payment",
+    "type": "record",
+    "name": "AvroPaymentRequest",
+    "fields": [
+        {
+            "name": "id",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+            "name": "sagaId",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+            "name": "clientId",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+            "name": "bookingId",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+            "name": "price",
+            "type": {
+                "type": "bytes",
+                "logicalType": "decimal",
+                "precision": 10,
+                "scale": 2
+            }
+        },
+        {
+            "name": "createdAt",
+            "type": {
+                "type": "long",
+                "logicalType": "local-timestamp-millis"
+            }
+        },
+        {
+            "name": "bookingStatus",
+            "type": {
+                "type": "enum",
+                "name": "BookingStatus",
+                "symbols": ["PENDING", "CANCELLED"]
+            }
+        }
+    ]
+}
