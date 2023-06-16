@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.vosiievska.bicycle.service.BookingDomainService;
 import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
-import org.vosiievska.bicycle.service.domain.valueobject.CustomerId;
+import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
 import org.vosiievska.bicycle.service.domain.valueobject.RepairServiceId;
 import org.vosiievska.bicycle.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.dto.request.DeclineBookingRequest;
@@ -46,7 +46,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
 
     Booking booking = bookingMapper.createBookingRequestToEntity(request, workshop, repairService);
     Booking validatedBooking = bookingDomainService.validateAndInitiateBooking(booking, workshop);
-    Booking savedBooking = saveBooking(validatedBooking);
+    Booking savedBooking = bookingRepository.saveBooking(validatedBooking);
     workshopRepository.makeSpecialistBusyById(savedBooking.getSpecialistId());
 
     log.info("New booking with id '{}' created by client id '{}'", savedBooking.getIdValue(), request.getCustomerId());
@@ -71,7 +71,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   }
 
   private void checkClientExistenceById(UUID customerId) {
-    if (!clientRepository.existsById(new CustomerId(customerId))) {
+    if (!clientRepository.existsById(new ClientId(customerId))) {
       throw new BookingDomainException("Client with id '%s' not found");
     }
   }
@@ -79,10 +79,5 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   private RepairService getRepairServiceById(String repairServiceId) {
     return repairServiceRepository.findById(new RepairServiceId(repairServiceId))
         .orElseThrow(() -> new EntityNotFoundException("Repair service by id '%s' not found", repairServiceId));
-  }
-
-  private Booking saveBooking(Booking newBooking) {
-    return bookingRepository.saveBooking(newBooking)
-        .orElseThrow(() -> new BookingDomainException("Could not save the booking"));
   }
 }

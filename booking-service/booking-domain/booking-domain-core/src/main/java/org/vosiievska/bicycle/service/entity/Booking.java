@@ -9,7 +9,7 @@ import org.vosiievska.bicycle.service.domain.entity.AggregateRoot;
 import org.vosiievska.bicycle.service.domain.valueobject.Address;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingStatus;
-import org.vosiievska.bicycle.service.domain.valueobject.CustomerId;
+import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
 import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;
 import org.vosiievska.bicycle.service.exception.BookingDomainException;
@@ -26,15 +26,11 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Booking extends AggregateRoot<BookingId> {
 
-  final CustomerId customerId;
+  final ClientId clientId;
   final WorkshopId workshopId;
   final SpecialistId specialistId;
   final RepairService repairService;
-  final Address clientAddress;
-//  final Price price;
-
-  // business logic updatable fields
-//  List<BookingTracking> tracking;//todo: delete
+  final Address address;
   BookingStatus currentStatus;
   Instant updatedAt;
   List<String> failureMessages;
@@ -46,12 +42,10 @@ public class Booking extends AggregateRoot<BookingId> {
   public void initBooking() {
     super.setId(new BookingId(UUID.randomUUID()));
     this.failureMessages = new ArrayList<>();
-//    this.tracking = new ArrayList<>();
     updateCurrentStatus(BookingStatus.PENDING);
   }
   public void updateCurrentStatus(BookingStatus status) {
     validateNextBookingStatus(status);
-//    this.tracking.add(new BookingTracking(status));//todo: delete
     this.currentStatus = status;
     this.updatedAt = Instant.now();
   }
@@ -76,7 +70,6 @@ public class Booking extends AggregateRoot<BookingId> {
 
   public void validateBooking() {
     validateBookingStatus();
-//    validateBookingTracking(); //todo: delete
     repairService.validatePrice();
   }
 
@@ -85,18 +78,4 @@ public class Booking extends AggregateRoot<BookingId> {
       throw new BookingDomainException("Booking state is missing!");
     }
   }
-
-//  private void validateBookingTracking() {
-//    if (tracking.isEmpty() || !currentStatus.equals(tracking.get(tracking.size() - 1).getStatus())) {
-//      throw new BookingDomainException("Tracking problem detected!");
-//    }
-//  }
-
-//  private void validateBookingPrice() {
-//    if (!repairService.getPrice().isPositive()) {
-////    if (!price.isPositive() && !price.equals(repairService.getPrice())) {
-//      throw new BookingDomainException(
-//          "Repai price [%s] does not match the service cost [%s]!", price, repairService.getPrice());
-//    }
-//  }
 }

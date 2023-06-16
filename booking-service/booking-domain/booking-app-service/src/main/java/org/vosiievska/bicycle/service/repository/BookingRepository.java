@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 public interface BookingRepository {
 
-  Optional<Booking> saveBooking(Booking booking);
+  Booking saveBooking(Booking booking);
 
   Optional<BookingStatusResponse> findBookingStatusById(BookingId bookingId);
 

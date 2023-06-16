@@ -5,14 +5,11 @@ import org.mapstruct.Mapping;
 import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
 import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.dto.request.CreateBookingRequest;
-import org.vosiievska.bicycle.service.dto.response.BookingResponse;
 import org.vosiievska.bicycle.service.dto.response.BookingStatusResponse;
 import org.vosiievska.bicycle.service.entity.Booking;
 import org.vosiievska.bicycle.service.entity.RepairService;
 import org.vosiievska.bicycle.service.entity.Specialist;
 import org.vosiievska.bicycle.service.entity.Workshop;
-import org.vosiievska.bicycle.service.event.BookingCreatedEvent;
-import org.vosiievska.bicycle.service.exception.BookingDomainException;
 
 import java.util.Set;
 
