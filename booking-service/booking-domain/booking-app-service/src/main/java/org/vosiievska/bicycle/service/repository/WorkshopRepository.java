@@ -12,5 +12,5 @@ public interface WorkshopRepository {
 
   Optional<Workshop> findAvailableWorkshopWithAvailableSpecialist();
 
-  void makeSpecialistBusyById(SpecialistId specialistId);
+  void updateSpecialistStatusById(SpecialistId specialistId, boolean busy);
 }

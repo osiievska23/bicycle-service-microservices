@@ -36,10 +36,10 @@ public class BookingController {
   }
 
   @PutMapping("/{bookingId}")
-  public ResponseEntity<BookingStatusResponse> declineBooking(@NotNull @PathVariable UUID bookingId) {
+  public ResponseEntity<BookingStatusResponse> cancelBooking(@NotNull @PathVariable UUID bookingId) {
     UUID customerId = UUID.randomUUID(); // todo: get client ID from session
     log.info("Rest request to cancel booking with id: {} by client id: {}", bookingId, customerId);
-    return ResponseEntity.ok(applicationFacade.declineBooking(new DeclineBookingRequest(bookingId, customerId)));
+    return ResponseEntity.ok(applicationFacade.cancelBooking(new DeclineBookingRequest(bookingId, customerId)));
   }
 
   @GetMapping("/{bookingId}")

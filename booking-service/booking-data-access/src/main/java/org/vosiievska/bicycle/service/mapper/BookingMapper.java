@@ -15,7 +15,7 @@ import java.util.Arrays;
     uses = {AddressMapper.class, BookingStatus.class})
 public abstract class BookingMapper {
 
-  private static final String FAILURE_MESSAGES_SEPARATOR = ";;";
+  public static final String FAILURE_MESSAGES_SEPARATOR = ";;";
 
   @Mapping(target = "id", expression = "java(booking.getIdValue())")
   @Mapping(target = "clientId", expression = "java(booking.getClientId().getValue())")

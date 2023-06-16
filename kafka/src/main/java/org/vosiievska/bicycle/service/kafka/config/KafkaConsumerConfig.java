@@ -1,5 +1,6 @@
 package org.vosiievska.bicycle.service.kafka.config;
 
+import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -8,17 +9,18 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaConsumerConfig {
+public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
   private static final String KAFKA_BROKER = "localhost:9092";
   private static final String GROUP_ID = "kafka-sandbox";
 
   @Bean
-  public ConsumerFactory<String, String> consumerFactory() {
+  public ConsumerFactory<K, V> consumerFactory() {
     return new DefaultKafkaConsumerFactory<>(consumerConfigurations());
   }
 
@@ -35,8 +37,8 @@ public class KafkaConsumerConfig {
   }
 
   @Bean
-  ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+  ConcurrentKafkaListenerContainerFactory<K, V> kafkaListenerContainerFactory() {
+    ConcurrentKafkaListenerContainerFactory<K, V> factory = new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory());
     return factory;
   }

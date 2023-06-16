@@ -18,14 +18,14 @@
       }
     },
     {
-      "name": "customerId",
+      "name": "bookingId",
       "type": {
         "type": "string",
         "logicalType": "uuid"
       }
     },
     {
-      "name": "bookingId",
+      "name": "clientId",
       "type": {
         "type": "string",
         "logicalType": "uuid"

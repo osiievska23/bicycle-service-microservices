@@ -8,6 +8,7 @@ import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.entity.WorkshopEntity;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface WorkshopJpaRepository extends JpaRepository<WorkshopEntity, Integer> {
@@ -20,6 +21,6 @@ public interface WorkshopJpaRepository extends JpaRepository<WorkshopEntity, Int
   Optional<WorkshopEntity> findAvailableWorkshopWithAvailableSpecialist();
 
   @Modifying
-  @Query("update SpecialistEntity s set s.busy = true where s.id = :specialistId")
-  void makeSpecialistBusyById(SpecialistId specialistId);
+  @Query("update SpecialistEntity s set s.busy = :busy where s.id = :specialistId")
+  void updateSpecialistStatusById(UUID specialistId, boolean busy);
 }

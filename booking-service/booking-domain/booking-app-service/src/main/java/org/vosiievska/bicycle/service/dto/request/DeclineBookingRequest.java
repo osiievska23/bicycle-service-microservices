@@ -16,5 +16,5 @@ public class DeclineBookingRequest {
   @NotNull
   UUID bookingId;
   @NotNull
-  UUID customerId;
+  UUID clientId;
 }

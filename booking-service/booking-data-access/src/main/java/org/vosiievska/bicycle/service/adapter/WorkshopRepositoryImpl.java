@@ -24,7 +24,7 @@ public class WorkshopRepositoryImpl implements WorkshopRepository {
   }
 
   @Override
-  public void makeSpecialistBusyById(SpecialistId specialistId) {
-
+  public void updateSpecialistStatusById(SpecialistId specialistId, boolean busy) {
+    workshopJpaRepository.updateSpecialistStatusById(specialistId.getValue(), busy);
   }
 }

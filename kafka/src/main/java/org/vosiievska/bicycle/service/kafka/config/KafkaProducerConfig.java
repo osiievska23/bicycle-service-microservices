@@ -1,6 +1,7 @@
 package org.vosiievska.bicycle.service.kafka.config;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -9,17 +10,18 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
 @RequiredArgsConstructor
-public class KafkaProducerConfig {
+public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
   private static final String KAFKA_BROKER = "localhost:9092";
 
   @Bean
-  public ProducerFactory<String, String> producerFactory() {
+  public ProducerFactory<K, V> producerFactory() {
     return new DefaultKafkaProducerFactory<>(producerConfigurations());
   }
 
@@ -35,7 +37,7 @@ public class KafkaProducerConfig {
   }
 
   @Bean
-  public KafkaTemplate<String, String> kafkaTemplate() {
+  public KafkaTemplate<K, V> kafkaTemplate() {
     return new KafkaTemplate<>(producerFactory());
   }
 }

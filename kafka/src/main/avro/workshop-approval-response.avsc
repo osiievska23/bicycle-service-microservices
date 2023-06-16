@@ -1,7 +1,7 @@
 {
   "namespace": "com.bicycle.service.avro.payment",
   "type": "record",
-  "name": "AvroRestaurantApprovalRequest",
+  "name": "AvroWorkshopApprovalResponse",
   "fields": [
     {
       "name": "id",
@@ -39,6 +39,14 @@
       }
     },
     {
+      "name": "workshopResponseStatus",
+      "type": {
+        "type": "enum",
+        "name": "WorkshopResponseStatus",
+        "symbols": ["APPROVED", "DECLINED"]
+      }
+    },
+    {
       "name": "createdAt",
       "type": {
         "type": "long",
@@ -46,11 +54,12 @@
       }
     },
     {
-      "name": "workshopResponseStatus",
+      "name": "failureMessages",
       "type": {
-        "type": "enum",
-        "name": "WorkshopResponseStatus",
-        "symbols": ["APPROVED", "DECLINED"]
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       }
     }
   ]

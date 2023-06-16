@@ -18,7 +18,7 @@
             }
         },
         {
-            "name": "customerId",
+            "name": "clientId",
             "type": {
                 "type": "string",
                 "logicalType": "uuid"
@@ -52,7 +52,7 @@
             "type": {
                 "type": "enum",
                 "name": "BookingStatus",
-                "symbols": ["PENDING", "CANCELLED"]
+                "symbols": ["PENDING", "CANCELLED", "PAID"]
             }
         }
     ]

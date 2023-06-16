@@ -8,7 +8,9 @@ import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 import org.vosiievska.bicycle.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.dto.request.DeclineBookingRequest;
 import org.vosiievska.bicycle.service.dto.response.BookingStatusResponse;
+import org.vosiievska.bicycle.service.event.BookingCanceledEvent;
 import org.vosiievska.bicycle.service.event.BookingCreatedEvent;
+import org.vosiievska.bicycle.service.event.BookingEvent;
 import org.vosiievska.bicycle.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.service.BookingApplicationService;
 
@@ -18,20 +20,23 @@ import org.vosiievska.bicycle.service.service.BookingApplicationService;
 public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
 
   private final BookingApplicationService bookingApplicationService;
-  private final DomainEventPublisher domainEventPublisher;
+  private final DomainEventPublisher<BookingEvent> domainEventPublisher;
   private final BookingMapper bookingMapper;
 
   @Override
   public BookingStatusResponse createBooking(CreateBookingRequest request) {
     BookingCreatedEvent bookingCreatedEvent = bookingApplicationService.createBooking(request);
     domainEventPublisher.publish(bookingCreatedEvent);
-    log.info("Published 'BookingCreatedEvent' for booking with id '{}'", bookingCreatedEvent.getBooking().getIdValue());
-    return bookingMapper.bookingToBookingStatusResponse(bookingCreatedEvent.getBooking());
+    log.info("Published 'BookingCreatedEvent' for booking with id '{}'", bookingCreatedEvent.getDomain().getIdValue());
+    return bookingMapper.bookingToBookingStatusResponse(bookingCreatedEvent.getDomain());
   }
 
   @Override
-  public BookingStatusResponse declineBooking(DeclineBookingRequest request) {
-    return null;
+  public BookingStatusResponse cancelBooking(DeclineBookingRequest request) {
+    BookingCanceledEvent bookingCanceledEvent = bookingApplicationService.cancelBooking(request);
+    domainEventPublisher.publish(bookingCanceledEvent);
+    log.info("Published 'BookingCanceledEvent' for booking with id '{}'", bookingCanceledEvent.getDomain().getIdValue());
+    return bookingMapper.bookingToBookingStatusResponse(bookingCanceledEvent.getDomain());
   }
 
   @Override

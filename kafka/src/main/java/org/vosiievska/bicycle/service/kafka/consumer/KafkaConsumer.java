@@ -1,6 +1,12 @@
 package org.vosiievska.bicycle.service.kafka.consumer;
 
-import org.apache.avro.specific.SpecificRecord;
+import org.apache.avro.specific.SpecificRecordBase;
 
-public interface KafkaConsumer {
+import java.io.Serializable;
+import java.util.List;
+
+public interface KafkaConsumer<K extends Serializable, V extends SpecificRecordBase> {
+
+  void listen(List<V> messages, List<K> keys, List<Integer> partitions, List<Long> offsets);
+
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
+import org.vosiievska.bicycle.service.domain.valueobject.BookingStatus;
 import org.vosiievska.bicycle.service.dto.interfaces.BookingStatusInterface;
 import org.vosiievska.bicycle.service.dto.response.BookingStatusResponse;
 import org.vosiievska.bicycle.service.entity.Booking;
@@ -12,6 +13,7 @@ import org.vosiievska.bicycle.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.repository.BookingJpaRepository;
 import org.vosiievska.bicycle.service.repository.BookingRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,5 +37,16 @@ public class BookingRepositoryImpl implements BookingRepository {
     BookingStatusInterface bookingStatusInterface = bookingJpaRepository.findBookingStatusById(bookingId.getValue())
         .orElseThrow(() -> new EntityNotFoundException("Booking by id '%s' not found", bookingId.getValue()));
     return Optional.ofNullable(bookingMapper.jpaEntityToBookingStatus(bookingStatusInterface));
+  }
+
+  @Override
+  public Optional<Booking> findById(BookingId bookingId) {
+    return bookingJpaRepository.findById(bookingId.getValue())
+        .map(bookingMapper::jpaEntityToBooking);
+  }
+
+  @Override
+  public void updateStatusById(BookingId bookingId, BookingStatus bookingStatus) {
+    bookingJpaRepository.updateStatusById(bookingId.getValue(), bookingStatus.toString());
   }
 }

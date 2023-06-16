@@ -1,7 +1,7 @@
 {
   "namespace": "com.bicycle.service.avro.payment",
   "type": "record",
-  "name": "AvroRestaurantApprovalResponse",
+  "name": "AvroWorkshopApprovalRequest",
   "fields": [
     {
       "name": "id",
@@ -39,14 +39,6 @@
       }
     },
     {
-      "name": "bookingStatus",
-      "type": {
-        "type": "enum",
-        "name": "BookingStatus",
-        "symbols": ["PENDING", "CANCELLED"]
-      }
-    },
-    {
       "name": "createdAt",
       "type": {
         "type": "long",
@@ -54,12 +46,11 @@
       }
     },
     {
-      "name": "failureMessages",
+      "name": "bookingStatus",
       "type": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
+        "type": "enum",
+        "name": "BookingStatus",
+        "symbols": ["PENDING", "CANCELLED", "PAID"]
       }
     }
   ]
