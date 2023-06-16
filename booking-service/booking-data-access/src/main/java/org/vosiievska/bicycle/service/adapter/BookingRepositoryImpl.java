@@ -13,7 +13,6 @@ import org.vosiievska.bicycle.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.repository.BookingJpaRepository;
 import org.vosiievska.bicycle.service.repository.BookingRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
