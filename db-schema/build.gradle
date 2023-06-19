@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id "org.flywaydb.flyway" version "6.5.7"
+}
+
+group = 'org.vosiievska'
+version = '1.0'
+
+ext {
+    flywayCoreVersion = '6.5.7'
+    dbUrl = System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/bicycle-service-db?serverTimezone=UTC&writeBatchInserts-true&binaryTransfer-true")
+    dbUsername = System.getenv().getOrDefault("DB_USERNAME", "postgres")
+    dbPass = System.getenv().getOrDefault("DB_PASS", "postgres")
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.postgresql:postgresql:42.2.27'
+    implementation "org.flywaydb:flyway-core:${flywayCoreVersion}"
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+flyway {
+    url = dbUrl
+    user = dbUsername
+    password = dbPass
+    baselineOnMigrate = true
+    outOfOrder = true
+    validateOnMigrate = true
+    schemas = ['service']
+}
+
+test {
+    useJUnitPlatform()
+}

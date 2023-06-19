@@ -12,4 +12,5 @@ include 'booking-service:booking-container'
 include 'booking-service:booking-domain:booking-domain-core'
 include 'booking-service:booking-domain:booking-app-service'
 include 'kafka'
+include 'db-schema'
 
