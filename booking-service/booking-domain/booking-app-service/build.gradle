@@ -5,6 +5,10 @@ plugins {
 group = 'org.vosiievska'
 version = '1.0-SNAPSHOT'
 
+configurations.implementation {
+    exclude group: 'org.yaml', module: 'snakeyaml'
+}
+
 ext {
     springVersion = '6.0.9'
     projectlombokVersion = '1.18.24'
