@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.vosiievska.bicycle.service.domain.event.AbstractDomainEvent;
+import org.vosiievska.bicycle.service.domain.event.DomainEvent;
 import org.vosiievska.bicycle.service.domain.event.DomainEventPublisher;
 import org.vosiievska.bicycle.service.kafka.producer.KafkaProducer;
 
@@ -23,6 +24,9 @@ public abstract class AbstractDomainEventPublisher<E extends AbstractDomainEvent
 
     kafkaProducer.send(getTopicName(), domainId, getRequestMessage(event));
   }
+
+  @Override
+  public abstract boolean supports(DomainEvent event);
 
   abstract String getTopicName();
 

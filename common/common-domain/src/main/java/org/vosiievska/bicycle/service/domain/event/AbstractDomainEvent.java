@@ -3,7 +3,7 @@ package org.vosiievska.bicycle.service.domain.event;
 import lombok.Getter;
 import org.vosiievska.bicycle.service.domain.entity.Entity;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * A Domain Event should be represented explicitly.
@@ -15,15 +15,15 @@ import java.time.Instant;
 public abstract class AbstractDomainEvent<T extends Entity<?>> implements DomainEvent {
 
   private final T domain;
-  private final Instant createdAt;
+  private final LocalDateTime createdAt;
 
-  public AbstractDomainEvent(T booking, Instant createdAt) {
+  public AbstractDomainEvent(T booking, LocalDateTime createdAt) {
     this.domain = booking;
     this.createdAt = createdAt;
   }
 
   public AbstractDomainEvent(T booking) {
-    this(booking, Instant.now());
+    this(booking, LocalDateTime.now());
   }
 
 }

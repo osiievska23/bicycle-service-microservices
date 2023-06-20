@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CreateBookingRequest {
 
   @NotNull
-  UUID customerId;
+  UUID clientId;
   @NotBlank
   String repairServiceId;
   @NotNull

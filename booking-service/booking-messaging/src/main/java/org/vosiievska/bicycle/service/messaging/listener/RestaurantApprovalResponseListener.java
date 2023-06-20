@@ -14,7 +14,7 @@ import org.vosiievska.bicycle.service.domain.service.dto.response.WorkshopRespon
 import org.vosiievska.bicycle.service.domain.service.listener.WorkshopResponseListener;
 import org.vosiievska.bicycle.service.kafka.consumer.KafkaConsumer;
 import org.vosiievska.bicycle.service.messaging.exception.BookingListenerException;
-import org.vosiievska.bicycle.service.messaging.mapper.BookingKafkaMessagingMapper;
+import org.vosiievska.bicycle.service.messaging.mapper.BookingAvroMessagingMapper;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RestaurantApprovalResponseListener implements KafkaConsumer<String, AvroWorkshopApprovalResponse> {
 
-  BookingKafkaMessagingMapper messagingMapper;
+  BookingAvroMessagingMapper messagingMapper;
   WorkshopResponseListener workshopResponseListener;
 
   @Override

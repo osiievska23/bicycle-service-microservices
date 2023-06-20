@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.vosiievska.bicycle.service.domain.core.BookingDomainService;
 import org.vosiievska.bicycle.service.domain.core.entity.Booking;
+import org.vosiievska.bicycle.service.domain.core.entity.Client;
 import org.vosiievska.bicycle.service.domain.core.entity.RepairService;
 import org.vosiievska.bicycle.service.domain.core.entity.Workshop;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCanceledEvent;
@@ -42,7 +43,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
 
   @Override
   public BookingCreatedEvent createBooking(CreateBookingRequest request) {
-    checkClientExistenceById(request.getCustomerId());
+    checkClientExistenceById(request.getClientId());
     Workshop workshop = getAvailableWorkshop();
     RepairService repairService = getRepairServiceById(request.getRepairServiceId());
 
@@ -51,7 +52,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
     Booking savedBooking = bookingRepository.saveBooking(validatedBooking);
     workshopRepository.updateSpecialistStatusById(savedBooking.getSpecialistId(), true);
 
-    log.info("New booking with id '{}' created by client id '{}'", savedBooking.getIdValue(), request.getCustomerId());
+    log.info("New booking with id '{}' created by client id '{}'", savedBooking.getIdValue(), request.getClientId());
     return new BookingCreatedEvent(savedBooking);
   }
 
@@ -93,5 +94,15 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   private RepairService getRepairServiceById(String repairServiceId) {
     return repairServiceRepository.findById(new RepairServiceId(repairServiceId))
         .orElseThrow(() -> new EntityNotFoundException("Repair service by id '%s' not found", repairServiceId));
+  }
+
+  private Client findClientById(UUID clientId) {
+    return clientRepository.findById(new ClientId(clientId))
+        .orElseThrow(() -> new EntityNotFoundException("Client by id: %s not found", clientId));
+  }
+
+  private Booking findBookingById(UUID bookingId) {
+    return bookingRepository.findById(new BookingId(bookingId))
+        .orElseThrow(() -> new EntityNotFoundException("Booking by id: %s not found", bookingId));
   }
 }

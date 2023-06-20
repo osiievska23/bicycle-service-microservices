@@ -9,6 +9,10 @@ configurations.implementation {
     exclude group: 'org.yaml', module: 'snakeyaml'
 }
 
+ext {
+    postgresqlVarsion = '42.2.27'
+}
+
 repositories {
     mavenCentral()
 }
@@ -20,6 +24,7 @@ dependencies {
     implementation project(':booking-service:booking-data-access')
     implementation project(':booking-service:booking-messaging')
 
+    implementation "org.postgresql:postgresql:${postgresqlVarsion}"
     implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 

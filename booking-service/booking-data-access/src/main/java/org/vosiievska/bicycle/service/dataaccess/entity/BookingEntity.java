@@ -7,6 +7,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -20,13 +21,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "booking", schema = "service")
 @Getter
 @Setter
 @Builder
@@ -45,7 +45,7 @@ public class BookingEntity {
       updatable = false, foreignKey = @ForeignKey(name = "fk_booking_client_id"))
   ClientEntity client;
 
-  @Column(name = "client_id", nullable = false)
+  @Column(name = "client_id", insertable = false, updatable = false)
   UUID clientId;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +53,7 @@ public class BookingEntity {
       updatable = false, foreignKey = @ForeignKey(name = "fk_booking_workshop_id"))
   WorkshopEntity workshop;
 
-  @Column(name = "workshop_id", nullable = false)
+  @Column(name = "workshop_id", insertable = false, updatable = false)
   Integer workshopId;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -61,14 +61,14 @@ public class BookingEntity {
       updatable = false, foreignKey = @ForeignKey(name = "fk_booking_specialist_id"))
   SpecialistEntity specialist;
 
-  @Column(name = "specialist_id", nullable = false)
+  @Column(name = "specialist_id", insertable = false, updatable = false)
   UUID specialistId;
 
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id")
   AddressEntity address;
 
-  @Column(name = "address_id", nullable = false)
+  @Column(name = "address_id", insertable = false, updatable = false)
   UUID addressId;
 
   @ManyToOne

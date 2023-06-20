@@ -30,7 +30,7 @@ public class Booking extends AggregateRoot<BookingId> {
   final WorkshopId workshopId;
   final SpecialistId specialistId;
   final RepairService repairService;
-  final Address address;
+  final Address clientAddress;
   BookingStatus currentStatus;
   Instant updatedAt;
   List<String> failureMessages;

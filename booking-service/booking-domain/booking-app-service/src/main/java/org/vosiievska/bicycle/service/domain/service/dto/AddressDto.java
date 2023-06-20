@@ -18,6 +18,8 @@ public class AddressDto {
   @NotBlank
   String street;
   @NotBlank
+  String houseMapper;
+  @NotBlank
   String district;
   @NotBlank
   String zipCode;

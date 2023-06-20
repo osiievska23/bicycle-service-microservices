@@ -18,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.Set;
 
 @Entity
-@Table(name = "workshop")
+@Table(name = "workshop", schema = "service")
 @Getter
 @Setter
 @NoArgsConstructor

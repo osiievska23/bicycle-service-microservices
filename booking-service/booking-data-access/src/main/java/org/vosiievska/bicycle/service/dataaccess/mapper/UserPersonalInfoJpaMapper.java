@@ -5,7 +5,7 @@ import org.vosiievska.bicycle.service.dataaccess.entity.BaseUserEntity;
 import org.vosiievska.bicycle.service.domain.core.valueobject.UserPersonalInfo;
 
 @Mapper(componentModel = "spring")
-public interface UserPersonalInfoMapper {
+public interface UserPersonalInfoJpaMapper {
 
   UserPersonalInfo jpaEntityToUserPersonalInfo(BaseUserEntity jpaEntity);
 

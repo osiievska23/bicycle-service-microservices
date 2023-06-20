@@ -14,7 +14,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "specialist")
+@Table(name = "specialist", schema = "service")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,7 +26,7 @@ public class SpecialistEntity extends BaseUserEntity {
   @JoinColumn(name = "workshop_id")
   WorkshopEntity workshop;
 
-  @Column(name = "workshop_id", nullable = false)
+  @Column(name = "workshop_id", insertable = false, updatable = false)
   Integer workshopId;
 
   @Column(name = "busy", nullable = false)

@@ -2,7 +2,7 @@ package org.vosiievska.bicycle.service.dataaccess.adapter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.vosiievska.bicycle.service.dataaccess.mapper.WorkshopMapper;
+import org.vosiievska.bicycle.service.dataaccess.mapper.WorkshopJpaMapper;
 import org.vosiievska.bicycle.service.dataaccess.repository.WorkshopJpaRepository;
 import org.vosiievska.bicycle.service.domain.core.entity.Workshop;
 import org.vosiievska.bicycle.service.domain.service.repository.WorkshopRepository;
@@ -15,12 +15,12 @@ import java.util.Optional;
 public class WorkshopRepositoryImpl implements WorkshopRepository {
 
   private final WorkshopJpaRepository workshopJpaRepository;
-  private final WorkshopMapper workshopMapper;
+  private final WorkshopJpaMapper workshopJpaMapper;
 
   @Override
   public Optional<Workshop> findAvailableWorkshopWithAvailableSpecialist() {
     return workshopJpaRepository.findAvailableWorkshopWithAvailableSpecialist()
-        .map(workshopMapper::jpaEntityToWorkshop);
+        .map(workshopJpaMapper::jpaEntityToWorkshop);
   }
 
   @Override

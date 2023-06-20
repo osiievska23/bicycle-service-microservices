@@ -10,9 +10,12 @@ import org.vosiievska.bicycle.service.domain.event.DomainEventPublisher;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.request.DeclineBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
+import org.vosiievska.bicycle.service.domain.service.exception.BookingEventPublisherException;
 import org.vosiievska.bicycle.service.domain.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.domain.service.service.BookingApplicationService;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
+
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -20,13 +23,13 @@ import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
 
   private final BookingApplicationService bookingApplicationService;
-  private final DomainEventPublisher<BookingEvent> domainEventPublisher;
+  private final Set<DomainEventPublisher<BookingEvent>> domainEventPublisher;
   private final BookingMapper bookingMapper;
 
   @Override
   public BookingStatusResponse createBooking(CreateBookingRequest request) {
     BookingCreatedEvent bookingCreatedEvent = bookingApplicationService.createBooking(request);
-    domainEventPublisher.publish(bookingCreatedEvent);
+    publishBookingEvent(bookingCreatedEvent);
     log.info("Published 'BookingCreatedEvent' for booking with id '{}'", bookingCreatedEvent.getDomain().getIdValue());
     return bookingMapper.bookingToBookingStatusResponse(bookingCreatedEvent.getDomain());
   }
@@ -34,7 +37,7 @@ public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
   @Override
   public BookingStatusResponse cancelBooking(DeclineBookingRequest request) {
     BookingCanceledEvent bookingCanceledEvent = bookingApplicationService.cancelBooking(request);
-    domainEventPublisher.publish(bookingCanceledEvent);
+    publishBookingEvent(bookingCanceledEvent);
     log.info("Published 'BookingCanceledEvent' for booking with id '{}'", bookingCanceledEvent.getDomain().getIdValue());
     return bookingMapper.bookingToBookingStatusResponse(bookingCanceledEvent.getDomain());
   }
@@ -42,5 +45,14 @@ public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
   @Override
   public BookingStatusResponse getBookingStatusById(BookingId bookingId) {
     return bookingApplicationService.getBookingStatus(bookingId);
+  }
+
+  private void publishBookingEvent(BookingEvent event) {
+    domainEventPublisher.stream()
+        .filter(publisher -> publisher.supports(event))
+        .findFirst()
+        .orElseThrow(() -> new BookingEventPublisherException(
+            "Booking domain event publisher supporting %s event not found", event.getClass().getSimpleName()))
+        .publish(event);
   }
 }

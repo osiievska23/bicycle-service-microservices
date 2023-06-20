@@ -5,7 +5,7 @@ import org.vosiievska.bicycle.service.dataaccess.entity.AddressEntity;
 import org.vosiievska.bicycle.service.domain.valueobject.Address;
 
 @Mapper(componentModel = "spring")
-public interface AddressMapper {
+public interface AddressJpaMapper {
 
   Address jpaEntityToAddress(AddressEntity jpaEntity);
 

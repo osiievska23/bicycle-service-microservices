@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.dataaccess.entity.BookingEntity;
 import org.vosiievska.bicycle.service.dataaccess.interfaces.BookingStatusInterface;
-import org.vosiievska.bicycle.service.dataaccess.mapper.BookingMapper;
+import org.vosiievska.bicycle.service.dataaccess.mapper.BookingJpaMapper;
 import org.vosiievska.bicycle.service.dataaccess.repository.BookingJpaRepository;
 import org.vosiievska.bicycle.service.domain.core.entity.Booking;
 import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
@@ -23,25 +23,25 @@ import java.util.Optional;
 public class BookingRepositoryImpl implements BookingRepository {
 
   private final BookingJpaRepository bookingJpaRepository;
-  private final BookingMapper bookingMapper;
+  private final BookingJpaMapper bookingJpaMapper;
 
   @Override
   public Booking saveBooking(Booking booking) {
-    BookingEntity savedEntity = bookingJpaRepository.save(bookingMapper.bookingToJpaEntity(booking));
-    return bookingMapper.jpaEntityToBooking(savedEntity);
+    BookingEntity savedEntity = bookingJpaRepository.save(bookingJpaMapper.bookingToJpaEntity(booking));
+    return bookingJpaMapper.jpaEntityToBooking(savedEntity);
   }
 
   @Override
   public Optional<BookingStatusResponse> findBookingStatusById(BookingId bookingId) {
     BookingStatusInterface bookingStatusInterface = bookingJpaRepository.findBookingStatusById(bookingId.getValue())
         .orElseThrow(() -> new EntityNotFoundException("Booking by id '%s' not found", bookingId.getValue()));
-    return Optional.ofNullable(bookingMapper.jpaEntityToBookingStatus(bookingStatusInterface));
+    return Optional.ofNullable(bookingJpaMapper.jpaEntityToBookingStatus(bookingStatusInterface));
   }
 
   @Override
   public Optional<Booking> findById(BookingId bookingId) {
     return bookingJpaRepository.findById(bookingId.getValue())
-        .map(bookingMapper::jpaEntityToBooking);
+        .map(bookingJpaMapper::jpaEntityToBooking);
   }
 
   @Override

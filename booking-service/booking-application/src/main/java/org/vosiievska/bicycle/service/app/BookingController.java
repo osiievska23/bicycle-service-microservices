@@ -31,7 +31,7 @@ public class BookingController {
   @PostMapping
   public ResponseEntity<BookingStatusResponse> createBooking(@Valid @RequestBody CreateBookingRequest request) {
     log.info("Rest request to create new booking for client with id: {} and repair service id: {}",
-        request.getCustomerId(), request.getRepairServiceId());
+        request.getClientId(), request.getRepairServiceId());
     return ResponseEntity.ok(applicationFacade.createBooking(request));
   }
 

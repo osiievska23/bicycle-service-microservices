@@ -14,7 +14,7 @@ import org.vosiievska.bicycle.service.domain.service.dto.response.PaymentRespons
 import org.vosiievska.bicycle.service.domain.service.listener.PaymentResponseListener;
 import org.vosiievska.bicycle.service.kafka.consumer.KafkaConsumer;
 import org.vosiievska.bicycle.service.messaging.exception.BookingListenerException;
-import org.vosiievska.bicycle.service.messaging.mapper.BookingKafkaMessagingMapper;
+import org.vosiievska.bicycle.service.messaging.mapper.BookingAvroMessagingMapper;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PaymentResponseKafkaListener implements KafkaConsumer<String, AvroPaymentResponse> {
 
-  BookingKafkaMessagingMapper messagingMapper;
+  BookingAvroMessagingMapper messagingMapper;
   PaymentResponseListener paymentResponseListener;
 
   @Override

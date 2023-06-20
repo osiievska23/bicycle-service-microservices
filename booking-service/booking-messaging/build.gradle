@@ -7,6 +7,7 @@ version = '1.0-SNAPSHOT'
 
 configurations.implementation {
     exclude group: 'org.yaml', module: 'snakeyaml'
+    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
 }
 
 repositories {
@@ -17,7 +18,7 @@ ext {
     mapstructVersion = '1.5.5.Final'
     projectlombokVersion = '1.18.24'
     kafkaSpringVersion = '3.0.6'
-    avroVaersion = '1.11.0'
+    avroVaersion = '1.11.1'
 }
 
 dependencies {
@@ -31,11 +32,11 @@ dependencies {
 
     implementation "org.apache.avro:avro:${avroVaersion}"
 
-
     implementation "org.springframework.kafka:spring-kafka:${kafkaSpringVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
     annotationProcessor "org.projectlombok:lombok:${projectlombokVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'

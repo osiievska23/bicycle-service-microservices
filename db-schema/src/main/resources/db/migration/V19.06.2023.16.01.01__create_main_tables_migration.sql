@@ -47,7 +47,7 @@ create table if not exists service.repair_service (
 create table if not exists service.booking (
     id              uuid        not null,
     client_id       uuid        not null,
-    workshop_id     bigint      not null,
+    workshop_id     int         not null,
     specialist_id   uuid        not null,
     address_id      uuid        not null,
     repair_service_title    varchar(100)    not null,

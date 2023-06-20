@@ -2,7 +2,7 @@ package org.vosiievska.bicycle.service.dataaccess.adapter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.vosiievska.bicycle.service.dataaccess.mapper.RepairServiceMapper;
+import org.vosiievska.bicycle.service.dataaccess.mapper.RepairServiceJpaMapper;
 import org.vosiievska.bicycle.service.dataaccess.repository.RepairServiceJpaRepository;
 import org.vosiievska.bicycle.service.domain.core.entity.RepairService;
 import org.vosiievska.bicycle.service.domain.service.repository.RepairServiceRepository;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class RepairServiceRepositoryImpl implements RepairServiceRepository {
 
   private final RepairServiceJpaRepository repairServiceJpaRepository;
-  private final RepairServiceMapper repairServiceMapper;
+  private final RepairServiceJpaMapper repairServiceMapper;
 
   @Override
   public Optional<RepairService> findById(RepairServiceId id) {
