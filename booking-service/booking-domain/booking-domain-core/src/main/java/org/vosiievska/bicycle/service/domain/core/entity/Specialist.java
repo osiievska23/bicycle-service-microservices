@@ -1,7 +1,7 @@
 package org.vosiievska.bicycle.service.domain.core.entity;
 
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.core.valueobject.UserPersonalInfo;
@@ -10,7 +10,7 @@ import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;
 
 @Getter
-@Builder
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Specialist extends Entity<SpecialistId> {
 

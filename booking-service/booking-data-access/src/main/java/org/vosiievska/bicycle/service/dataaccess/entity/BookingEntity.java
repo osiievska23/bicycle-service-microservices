@@ -14,7 +14,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +28,6 @@ import java.util.UUID;
 @Table(name = "booking", schema = "service")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -37,7 +35,7 @@ import java.util.UUID;
 public class BookingEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.UUID)
   UUID id;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -45,7 +43,7 @@ public class BookingEntity {
       updatable = false, foreignKey = @ForeignKey(name = "fk_booking_client_id"))
   ClientEntity client;
 
-  @Column(name = "client_id", insertable = false, updatable = false)
+  @Column(name = "client_id", nullable = false)
   UUID clientId;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +51,7 @@ public class BookingEntity {
       updatable = false, foreignKey = @ForeignKey(name = "fk_booking_workshop_id"))
   WorkshopEntity workshop;
 
-  @Column(name = "workshop_id", insertable = false, updatable = false)
+  @Column(name = "workshop_id", nullable = false)
   Integer workshopId;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -61,19 +59,20 @@ public class BookingEntity {
       updatable = false, foreignKey = @ForeignKey(name = "fk_booking_specialist_id"))
   SpecialistEntity specialist;
 
-  @Column(name = "specialist_id", insertable = false, updatable = false)
+  @Column(name = "specialist_id", nullable = false)
   UUID specialistId;
 
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name = "address_id")
+  @JoinColumn(name = "address_id", insertable=false, updatable=false,
+      foreignKey = @ForeignKey(name = "fk_booking_address_id"))
   AddressEntity address;
 
-  @Column(name = "address_id", insertable = false, updatable = false)
+  @Column(name = "address_id", nullable = false)
   UUID addressId;
 
   @ManyToOne
-  @JoinColumn(name = "repair_service_title", referencedColumnName = "title", insertable = false,
-      updatable = false, foreignKey = @ForeignKey(name = "fk_booking_repair_service_title"))
+  @JoinColumn(name = "repair_service_title", referencedColumnName = "title", nullable = false,
+      foreignKey = @ForeignKey(name = "fk_booking_repair_service_title"))
   RepairServiceEntity repairService;
 
   @Column(name = "current_status", length = 45, nullable = false)

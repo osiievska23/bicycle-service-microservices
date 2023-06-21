@@ -13,13 +13,13 @@ import java.util.UUID;
 public interface WorkshopJpaRepository extends JpaRepository<WorkshopEntity, Integer> {
 
   @Query(nativeQuery = true,
-      value = "select * from workshop w "
+      value = "select * from service.workshop w "
           + "where w.available = true "
-          + "and exists (select s.id from specialist s where s.workshop_id = w.id and s.busy = false) "
+          + "and exists (select s.id from service.specialist s where s.workshop_id = w.id and s.busy = false) "
           + "limit 1;")
   Optional<WorkshopEntity> findAvailableWorkshopWithAvailableSpecialist();
 
   @Modifying
-  @Query("update SpecialistEntity s set s.busy = :busy where s.id = :specialistId")
+  @Query("update SpecialistEntity s set s.busy = ?2 where s.id = ?1")
   void updateSpecialistStatusById(UUID specialistId, boolean busy);
 }

@@ -16,6 +16,7 @@ import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.request.DeclineBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
+import org.vosiievska.bicycle.service.domain.service.mapper.AddressMapper;
 import org.vosiievska.bicycle.service.domain.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.domain.service.repository.BookingRepository;
 import org.vosiievska.bicycle.service.domain.service.repository.ClientRepository;
@@ -40,14 +41,15 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   private final WorkshopRepository workshopRepository;
   private final RepairServiceRepository repairServiceRepository;
   private final BookingMapper bookingMapper;
+  private final AddressMapper addressMapper;
 
   @Override
   public BookingCreatedEvent createBooking(CreateBookingRequest request) {
-    checkClientExistenceById(request.getClientId());
+    Client client = findClientWithAddressById(request.getClientId());
     Workshop workshop = getAvailableWorkshop();
     RepairService repairService = getRepairServiceById(request.getRepairServiceId());
 
-    Booking booking = bookingMapper.createBookingRequestToEntity(request, workshop, repairService);
+    Booking booking = bookingMapper.createBookingRequestToEntity(client, workshop, repairService);
     Booking validatedBooking = bookingDomainService.validateAndInitiateBooking(booking, workshop);
     Booking savedBooking = bookingRepository.saveBooking(validatedBooking);
     workshopRepository.updateSpecialistStatusById(savedBooking.getSpecialistId(), true);
@@ -83,6 +85,11 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   private Workshop getAvailableWorkshop() {
     return workshopRepository.findAvailableWorkshopWithAvailableSpecialist()
         .orElseThrow(() -> new EntityNotFoundException("Available workshop not found"));
+  }
+
+  private Client findClientWithAddressById(UUID clientId) {
+    return clientRepository.findClientWithAddressById(clientId)
+        .orElseThrow(() -> new EntityNotFoundException("Client with id '%s' not found", clientId));
   }
 
   private void checkClientExistenceById(UUID customerId) {

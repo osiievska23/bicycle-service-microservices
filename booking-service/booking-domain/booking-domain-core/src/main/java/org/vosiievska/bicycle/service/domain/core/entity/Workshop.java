@@ -1,7 +1,7 @@
 package org.vosiievska.bicycle.service.domain.core.entity;
 
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.core.exception.BookingDomainException;
@@ -11,7 +11,7 @@ import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;
 import java.util.Set;
 
 @Getter
-@Builder
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Workshop extends AggregateRoot<WorkshopId> {
 
@@ -26,8 +26,8 @@ public class Workshop extends AggregateRoot<WorkshopId> {
     if (!available) {
       throw new BookingDomainException("Workshop with id '%s' is not available!");
     }
-    if (specialists.stream().anyMatch(Specialist::isBusy)) {
-      throw new BookingDomainException("Workshop with id '%s' does not have available specialists!");
+    if (specialists.stream().allMatch(Specialist::isBusy)) {
+      throw new BookingDomainException("Workshop with id '%s' does not have available specialists!", this.getIdValue());
     }
   }
 }

@@ -22,8 +22,7 @@ import java.util.UUID;
 public class BaseUserEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.UUID)
   UUID id;
 
   @Column(name = "first_name", nullable = false, length = 45)

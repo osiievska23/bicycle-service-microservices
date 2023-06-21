@@ -10,9 +10,11 @@ import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
 
 @Mapper(
     componentModel = "spring",
-    uses = {AddressJpaMapper.class, UserPersonalInfoJpaMapper.class})
+    uses = {AddressJpaMapper.class, UserPersonalInfoJpaMapper.class},
+    imports = ClientId.class)
 public abstract class ClientJpaMapper {
 
+  @Mapping(target = "id", expression = "java(new ClientId(jpaEntity.getId()))")
   @Mapping(target = "clientInfo", source = "jpaEntity")
   public abstract Client jpaEntityToClient(ClientEntity jpaEntity);
 

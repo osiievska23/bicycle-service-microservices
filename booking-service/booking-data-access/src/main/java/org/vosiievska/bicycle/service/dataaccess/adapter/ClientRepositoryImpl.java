@@ -9,6 +9,7 @@ import org.vosiievska.bicycle.service.domain.service.repository.ClientRepository
 import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -26,5 +27,11 @@ public class ClientRepositoryImpl implements ClientRepository {
   @Override
   public boolean existsById(ClientId clientId) {
     return clientJpaRepository.existsById(clientId.getValue());
+  }
+
+  @Override
+  public Optional<Client> findClientWithAddressById(UUID clientId) {
+    return clientJpaRepository.findClientWithAddressById(clientId)
+        .map(clientJpaMapper::jpaEntityToClient);
   }
 }

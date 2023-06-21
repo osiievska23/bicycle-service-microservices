@@ -3,6 +3,7 @@ package org.vosiievska.bicycle.service.domain.service.facade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCanceledEvent;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCreatedEvent;
 import org.vosiievska.bicycle.service.domain.core.event.BookingEvent;
@@ -19,11 +20,12 @@ import java.util.Set;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
 
   private final BookingApplicationService bookingApplicationService;
-  private final Set<DomainEventPublisher<BookingEvent>> domainEventPublisher;
+  private final Set<DomainEventPublisher> domainEventPublisher;
   private final BookingMapper bookingMapper;
 
   @Override

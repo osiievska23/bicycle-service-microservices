@@ -20,7 +20,7 @@ public abstract class AbstractDomainEventPublisher<E extends AbstractDomainEvent
     String domainClass = event.getDomain().getClass().getSimpleName();
     String domainId = event.getDomain().getId().getValue().toString();
 
-    log.info("Received {} for domain class: {} by id: {}", eventClass, domainClass, domainId);
+    log.info("Received '{}' for domain class '{}' by id: {}", eventClass, domainClass, domainId);
 
     kafkaProducer.send(getTopicName(), domainId, getRequestMessage(event));
   }

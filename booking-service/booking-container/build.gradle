@@ -9,10 +9,6 @@ configurations.implementation {
     exclude group: 'org.yaml', module: 'snakeyaml'
 }
 
-ext {
-    postgresqlVarsion = '42.2.27'
-}
-
 repositories {
     mavenCentral()
 }

@@ -20,6 +20,7 @@ jar {
 
 ext {
     springBootVersion = '3.1.0'
+    postgresqlVarsion = '42.2.27'
 }
 
 repositories {

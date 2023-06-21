@@ -8,7 +8,6 @@ version = '1.0'
 
 ext {
     flywayCoreVersion = '6.5.7'
-    postgresqlVarsion = '42.2.27'
     dbUrl = System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/bicycle-service-db?serverTimezone=UTC&writeBatchInserts-true&binaryTransfer-true")
     dbUsername = System.getenv().getOrDefault("DB_USERNAME", "postgres")
     dbPass = System.getenv().getOrDefault("DB_PASS", "postgres")

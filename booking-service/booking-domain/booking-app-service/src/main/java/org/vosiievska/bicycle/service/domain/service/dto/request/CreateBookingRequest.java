@@ -5,12 +5,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.vosiievska.bicycle.service.domain.service.dto.AddressDto;
 
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateBookingRequest {
@@ -19,7 +20,5 @@ public class CreateBookingRequest {
   UUID clientId;
   @NotBlank
   String repairServiceId;
-  @NotNull
-  AddressDto clientAddress;
 
 }

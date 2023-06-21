@@ -11,13 +11,6 @@
             }
         },
         {
-            "name": "sagaId",
-            "type": {
-                "type": "string",
-                "logicalType": "uuid"
-            }
-        },
-        {
             "name": "clientId",
             "type": {
                 "type": "string",

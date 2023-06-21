@@ -1,7 +1,7 @@
 package org.vosiievska.bicycle.service.domain.core.entity;
 
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Builder
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Client extends AggregateRoot<ClientId> {

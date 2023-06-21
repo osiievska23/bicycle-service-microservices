@@ -2,6 +2,7 @@ package org.vosiievska.bicycle.service.dataaccess.adapter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.vosiievska.bicycle.service.dataaccess.entity.BookingEntity;
 import org.vosiievska.bicycle.service.dataaccess.interfaces.BookingStatusInterface;
 import org.vosiievska.bicycle.service.dataaccess.mapper.BookingJpaMapper;
@@ -19,6 +20,7 @@ import java.util.Optional;
  * Adapter connected to the secondary port
  */
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class BookingRepositoryImpl implements BookingRepository {
 

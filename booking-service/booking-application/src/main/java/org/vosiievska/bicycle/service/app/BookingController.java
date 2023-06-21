@@ -23,7 +23,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "booking/")
+@RequestMapping(value = "/booking")
 public class BookingController {
 
   private final BookingApplicationFacade applicationFacade;

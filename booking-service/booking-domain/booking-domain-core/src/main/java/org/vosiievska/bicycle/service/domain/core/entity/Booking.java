@@ -1,7 +1,7 @@
 package org.vosiievska.bicycle.service.domain.core.entity;
 
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -20,9 +20,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static org.vosiievska.bicycle.service.domain.valueobject.BookingStatus.PENDING;
+
 @Getter
 @Setter
-@Builder
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Booking extends AggregateRoot<BookingId> {
 
@@ -42,7 +44,7 @@ public class Booking extends AggregateRoot<BookingId> {
   public void initBooking() {
     super.setId(new BookingId(UUID.randomUUID()));
     this.failureMessages = new ArrayList<>();
-    updateCurrentStatus(BookingStatus.PENDING);
+    updateCurrentStatus(PENDING);
   }
   public void updateCurrentStatus(BookingStatus status) {
     validateNextBookingStatus(status);
@@ -62,7 +64,10 @@ public class Booking extends AggregateRoot<BookingId> {
   }
 
   private void validateNextBookingStatus(BookingStatus newStatus) {
-    if (!currentStatus.isNextStatusValid(newStatus)) {
+    if (currentStatus == null && PENDING.equals(newStatus)) {
+      return;
+    }
+    if (currentStatus == null || !currentStatus.isNextStatusValid(newStatus)) {
       throw new BookingDomainException(
           "Updating booking status from '%s' to '%s' is not allowed!", this.currentStatus.name(), newStatus.name());
     }

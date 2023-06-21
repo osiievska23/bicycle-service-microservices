@@ -1,14 +1,16 @@
+create extension if not exists "uuid-ossp";
+
 create schema if not exists service;
 
 create table if not exists service."user" (
-    id              uuid        not null,
+    id              uuid        not null    default uuid_generate_v4(),
     first_name      varchar(45) not null,
     last_name       varchar(45) not null,
     dob             date        not null
 );
 
 create table if not exists service.address (
-    id              uuid        not null,
+    id              uuid        not null    default uuid_generate_v4(),
     city            varchar(45) not null,
     street          varchar(45) not null,
     house_number    varchar(20) not null,
@@ -25,7 +27,7 @@ create table if not exists service.client (
 ) inherits(service."user");
 
 create table if not exists service.workshop (
-    id              int      	not null,
+    id              serial    	not null,
     available       boolean     not null default true,
     constraint workshop_id_pk primary key (id)
 );
@@ -45,7 +47,7 @@ create table if not exists service.repair_service (
 );
 
 create table if not exists service.booking (
-    id              uuid        not null,
+    id              uuid        not null    default uuid_generate_v4(),
     client_id       uuid        not null,
     workshop_id     int         not null,
     specialist_id   uuid        not null,
@@ -55,9 +57,9 @@ create table if not exists service.booking (
     failure_messages        text,
     updated_at              timestamp        not null,
     constraint booking_id_pk primary key (id),
-    constraint fk_booking_client foreign key (client_id) references service.client(id),
-    constraint fk_booking_workshop foreign key (workshop_id) references service.workshop(id),
-    constraint fk_booking_specialist foreign key (specialist_id) references service.specialist(id),
-    constraint fk_booking_address foreign key (address_id) references service.address(id),
-    constraint fk_booking_repair_service foreign key (repair_service_title) references service.repair_service(title)
+    constraint fk_booking_client_id foreign key (client_id) references service.client(id),
+    constraint fk_booking_workshop_id foreign key (workshop_id) references service.workshop(id),
+    constraint fk_booking_specialist_id foreign key (specialist_id) references service.specialist(id),
+    constraint fk_booking_address_id foreign key (address_id) references service.address(id),
+    constraint fk_booking_repair_service_title foreign key (repair_service_title) references service.repair_service(title)
 );
