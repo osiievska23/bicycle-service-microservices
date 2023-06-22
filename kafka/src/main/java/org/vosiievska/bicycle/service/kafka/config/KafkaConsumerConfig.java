@@ -1,8 +1,12 @@
 package org.vosiievska.bicycle.service.kafka.config;
 
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.apache.avro.specific.SpecificRecordBase;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -13,11 +17,20 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG;
+
+@Data
 @Configuration
+@ConfigurationProperties(prefix = "kafka-consumer-config")
+@RequiredArgsConstructor
 public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
-  private static final String KAFKA_BROKER = "localhost:9092";
-  private static final String GROUP_ID = "kafka-sandbox";
+  private final KafkaGlobalConfig kafkaGlobalConfig;
+
+  private String paymentResponseGroupId;
+  private String workshopApprovalGroupId;
 
   @Bean
   public ConsumerFactory<K, V> consumerFactory() {
@@ -28,10 +41,12 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
   public Map<String, Object> consumerConfigurations() {
     Map<String, Object> configurations = new HashMap<>();
 
-    configurations.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKER);
-    configurations.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
-    configurations.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-    configurations.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    configurations.put(BOOTSTRAP_SERVERS_CONFIG, kafkaGlobalConfig.getBootstrapServersConfig());
+    configurations.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, kafkaGlobalConfig.getSchemaRegistryUrl());
+    configurations.put(KafkaAvroDeserializerConfig.AUTO_REGISTER_SCHEMAS, true);
+    configurations.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
+    configurations.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    configurations.put(VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
 
     return configurations;
   }

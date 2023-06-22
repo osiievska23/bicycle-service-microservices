@@ -25,7 +25,14 @@ ext {
 
 repositories {
     mavenCentral()
-    mavenLocal()
+
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://packages.confluent.io/maven/" }
+    }
 }
 
 dependencies {

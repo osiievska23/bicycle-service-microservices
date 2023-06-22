@@ -1,5 +1,7 @@
 package org.vosiievska.bicycle.service.kafka.config;
 
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
+import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import lombok.RequiredArgsConstructor;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -14,11 +16,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG;
+
 @Configuration
 @RequiredArgsConstructor
 public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
-  private static final String KAFKA_BROKER = "localhost:9092";
+  private final KafkaGlobalConfig kafkaGlobalConfig;
 
   @Bean
   public ProducerFactory<K, V> producerFactory() {
@@ -29,9 +33,11 @@ public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecor
   public Map<String, Object> producerConfigurations() {
     Map<String, Object> configurations = new HashMap<>();
 
-    configurations.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKER);
+    configurations.put(BOOTSTRAP_SERVERS_CONFIG, kafkaGlobalConfig.getBootstrapServersConfig());
+    configurations.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, kafkaGlobalConfig.getSchemaRegistryUrl());
+    configurations.put(KafkaAvroSerializerConfig.AUTO_REGISTER_SCHEMAS, true);
     configurations.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-    configurations.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    configurations.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
 
     return configurations;
   }

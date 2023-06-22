@@ -29,7 +29,7 @@ public class RestaurantApprovalResponseListener implements KafkaConsumer<String,
 
   @Override
   @KafkaListener(
-      id = "${kafka-consumer-config.workshop-approval-group-id}",
+      id = "${kafka-consumer-config.workshop-approval-response-group-id}",
       topics = "${booking-service.workshop-approval-response-topic-name}")
   public void listen(@Payload List<AvroWorkshopApprovalResponse> messages,
                      @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,

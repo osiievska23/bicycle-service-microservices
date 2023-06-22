@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(Exception.class)
   public final ErrorDetails handleIllegalArgumentException(Exception ex, WebRequest request) {
     log.warn("Unexpected error occurred!");
-    return new ErrorDetails(ex.getMessage(), request.getDescription(false));
+    return new ErrorDetails(ex.getClass().getName() + ": " + ex.getMessage(), request.getDescription(false));
   }
 
   private ErrorDetails buildErrorDetailsResponse(Exception ex, WebRequest request) {
