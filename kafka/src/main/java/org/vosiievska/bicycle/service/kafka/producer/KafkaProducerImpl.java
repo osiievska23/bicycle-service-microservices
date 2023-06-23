@@ -37,9 +37,11 @@ public class KafkaProducerImpl implements KafkaProducer {
     completableFuture.whenComplete((res, ex) -> {
       if (ex == null) {
         long offset = res.getRecordMetadata().offset();
-        log.info("Sent message=[{}] to the topic=[{}] with offset[{}]", message, topicName, offset);
+        log.info("Sent message=[{}] by key [{}] to the topic=[{}] with offset[{}]", message, key, topicName, offset);
       } else {
-        log.info("Unable to send message=[{}] with exception message=[{}]", message, ex.getMessage());
+        log.info("Unable to send message=[{}] by key [{}] with exception message=[{}]", message, key, ex.getMessage());
+        throw new KafkaBrokerException(
+                "Unable to send message=[%s] by key [%s] with exception message=[{}]", message, key, ex.getMessage());
       }
     });
   }
