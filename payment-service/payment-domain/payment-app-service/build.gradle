@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+configurations.implementation {
+    exclude group: 'org.yaml', module: 'snakeyaml'
+}
+
+group = 'org.vosiievska'
+version = '1.0'
+
+ext {
+    springVersion = '6.0.9'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':common:common-domain')
+    implementation project(':payment-service:payment-domain:payment-domain-core')
+
+    implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+    implementation "org.springframework:spring-tx:${springVersion}"
+
+    implementation "org.projectlombok:lombok:${projectlombokVersion}"
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+
+    annotationProcessor "org.projectlombok:lombok:${projectlombokVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

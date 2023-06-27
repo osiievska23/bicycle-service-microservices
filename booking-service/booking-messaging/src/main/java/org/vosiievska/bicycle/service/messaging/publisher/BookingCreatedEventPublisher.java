@@ -31,12 +31,12 @@ public class BookingCreatedEventPublisher extends AbstractDomainEventPublisher<B
   }
 
   @Override
-  String getTopicName() {
+  public String getTopicName() {
     return configurationData.getPaymentRequestTopicName();
   }
 
   @Override
-  SpecificRecordBase getRequestMessage(BookingCreatedEvent event) {
+  public SpecificRecordBase getRequestMessage(BookingCreatedEvent event) {
     return messagingMapper.bookingEventToAvroPaymentRequest(event);
   }
 }

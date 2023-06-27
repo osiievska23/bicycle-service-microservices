@@ -28,7 +28,7 @@ public abstract class AbstractDomainEventPublisher<E extends AbstractDomainEvent
   @Override
   public abstract boolean supports(DomainEvent event);
 
-  abstract String getTopicName();
+  public abstract String getTopicName();
 
-  abstract SpecificRecordBase getRequestMessage(E event);
+  public abstract SpecificRecordBase getRequestMessage(E event);
 }

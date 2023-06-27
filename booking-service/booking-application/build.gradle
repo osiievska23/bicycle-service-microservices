@@ -13,10 +13,6 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    projectlombokVersion = '1.18.24'
-}
-
 dependencies {
     implementation project(':common:common-domain')
     implementation project(':booking-service:booking-domain:booking-app-service')

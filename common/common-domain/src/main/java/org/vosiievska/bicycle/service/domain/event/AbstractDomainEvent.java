@@ -1,9 +1,11 @@
 package org.vosiievska.bicycle.service.domain.event;
 
 import lombok.Getter;
-import org.vosiievska.bicycle.service.domain.entity.Entity;
+import org.vosiievska.bicycle.service.domain.entity.BaseEntity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Domain Event should be represented explicitly.
@@ -12,18 +14,24 @@ import java.time.LocalDateTime;
  * @param <T> domain class
  */
 @Getter
-public abstract class AbstractDomainEvent<T extends Entity<?>> implements DomainEvent {
+public abstract class AbstractDomainEvent<T extends BaseEntity<?>> implements DomainEvent {
 
   private final T domain;
   private final LocalDateTime createdAt;
+  private final List<String> failureMessages;
 
-  public AbstractDomainEvent(T booking, LocalDateTime createdAt) {
-    this.domain = booking;
+  public AbstractDomainEvent(T domain, LocalDateTime createdAt, List<String> failureMessages) {
+    this.domain = domain;
     this.createdAt = createdAt;
+    this.failureMessages = failureMessages;
   }
 
-  public AbstractDomainEvent(T booking) {
-    this(booking, LocalDateTime.now());
+  public AbstractDomainEvent(T domain, List<String> failureMessages) {
+    this(domain, LocalDateTime.now(), failureMessages);
+  }
+
+  public AbstractDomainEvent(T domain) {
+    this(domain, LocalDateTime.now(), new ArrayList<>());
   }
 
 }

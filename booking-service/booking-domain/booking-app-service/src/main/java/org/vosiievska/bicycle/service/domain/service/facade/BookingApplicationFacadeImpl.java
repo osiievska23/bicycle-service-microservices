@@ -25,7 +25,7 @@ import java.util.Set;
 public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
 
   private final BookingApplicationService bookingApplicationService;
-  private final Set<DomainEventPublisher> domainEventPublisher;
+  private final Set<DomainEventPublisher<BookingEvent>> domainEventPublisher;
   private final BookingMapper bookingMapper;
 
   @Override

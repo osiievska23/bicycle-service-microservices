@@ -31,12 +31,12 @@ public class BookingCancelledEventPublisher extends AbstractDomainEventPublisher
   }
 
   @Override
-  String getTopicName() {
+  public String getTopicName() {
     return configurationData.getPaymentRequestTopicName();
   }
 
   @Override
-  SpecificRecordBase getRequestMessage(BookingCanceledEvent event) {
+  public SpecificRecordBase getRequestMessage(BookingCanceledEvent event) {
     return messagingMapper.bookingEventToAvroPaymentRequest(event);
   }
 }
