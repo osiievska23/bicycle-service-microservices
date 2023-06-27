@@ -15,7 +15,6 @@ ext {
     kafkaVersion = '3.4.0'
     kafkaSpringVersion = '3.0.6'
     avroVaersion = '1.11.0'
-    projectlombokVersion = '1.18.24'
 }
 
 dependencies {

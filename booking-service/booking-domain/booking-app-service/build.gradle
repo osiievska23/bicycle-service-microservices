@@ -11,8 +11,6 @@ configurations.implementation {
 
 ext {
     springVersion = '6.0.9'
-    projectlombokVersion = '1.18.24'
-    mapstructVersion = '1.5.5.Final'
 }
 
 repositories {

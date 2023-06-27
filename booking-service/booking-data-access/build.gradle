@@ -13,12 +13,6 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    projectlombokVersion = '1.18.24'
-    postgresqlVersion = '42.6.0'
-    mapstructVersion = '1.5.5.Final'
-}
-
 dependencies {
     implementation project(':common:common-domain')
     implementation project(':common:common-data-access')

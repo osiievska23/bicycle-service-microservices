@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id "org.flywaydb.flyway" version "6.5.7"
+    id "org.flywaydb.flyway" version "9.20.0"
 }
 
 group = 'org.vosiievska'
@@ -19,8 +19,14 @@ repositories {
 }
 
 dependencies {
-    implementation "org.postgresql:postgresql:${postgresqlVarsion}"
+    implementation "org.postgresql:postgresql:${postgresqlVersion}"
     implementation "org.flywaydb:flyway-core:${flywayCoreVersion}"
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+
+    implementation "org.projectlombok:lombok:${projectlombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${projectlombokVersion}"
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -34,6 +40,7 @@ flyway {
     outOfOrder = true
     validateOnMigrate = true
     schemas = ['service']
+    cleanDisabled = false
 }
 
 test {

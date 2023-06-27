@@ -5,10 +5,6 @@ plugins {
 group = 'org.vosiievska'
 version = '1.0'
 
-ext {
-    projectlombokVersion = '1.18.24'
-}
-
 repositories {
     mavenCentral()
 }
