@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.core.exception.BookingDomainException;
-import org.vosiievska.bicycle.service.domain.entity.Entity;
+import org.vosiievska.bicycle.service.domain.entity.BaseEntity;
 import org.vosiievska.bicycle.service.domain.valueobject.Price;
 import org.vosiievska.bicycle.service.domain.valueobject.RepairServiceId;
 
@@ -17,7 +17,7 @@ import org.vosiievska.bicycle.service.domain.valueobject.RepairServiceId;
 @Builder
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RepairService extends Entity<RepairServiceId> {
+public class RepairService extends BaseEntity<RepairServiceId> {
 
   final String title;
   final Price price;

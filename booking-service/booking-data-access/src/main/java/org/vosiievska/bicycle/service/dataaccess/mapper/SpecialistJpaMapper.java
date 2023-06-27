@@ -2,7 +2,7 @@ package org.vosiievska.bicycle.service.dataaccess.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.vosiievska.bicycle.service.dataaccess.entity.SpecialistEntity;
+import org.vosiievska.bicycle.service.dataaccess.jpa.entity.SpecialistEntity;
 import org.vosiievska.bicycle.service.domain.core.entity.Specialist;
 import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;

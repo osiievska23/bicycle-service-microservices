@@ -22,7 +22,7 @@ import java.util.List;
 public interface BookingAvroMessagingMapper {
 
   @Mapping(target = "id", expression = "java(UUID.randomUUID().toString())")
-  @Mapping(target = "clientId", source = "event.booking.specialistId.value")
+  @Mapping(target = "clientId", source = "event.booking.clientId.value")
   @Mapping(target = "bookingId", source = "event.booking.id.value")
   @Mapping(target = "price", source = "event.booking.repairService.price.amount")
   @Mapping(target = "bookingStatus",

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories("org.vosiievska.bicycle.service.dataaccess.repository")
-@EntityScan("org.vosiievska.bicycle.service.dataaccess.entity")
+@EntityScan("org.vosiievska.bicycle.service.dataaccess.jpa.entity")
 public class DataSourceConfig {
 }

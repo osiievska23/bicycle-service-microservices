@@ -2,7 +2,7 @@ package org.vosiievska.bicycle.service.dataaccess.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.vosiievska.bicycle.service.dataaccess.entity.AddressEntity;
+import org.vosiievska.bicycle.service.dataaccess.jpa.entity.AddressEntity;
 import org.vosiievska.bicycle.service.domain.valueobject.Address;
 
 import java.util.UUID;

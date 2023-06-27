@@ -4,7 +4,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.vosiievska.bicycle.service.dataaccess.entity.ClientEntity;
+import org.vosiievska.bicycle.service.dataaccess.jpa.entity.ClientEntity;
 import org.vosiievska.bicycle.service.domain.core.entity.Client;
 import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
 

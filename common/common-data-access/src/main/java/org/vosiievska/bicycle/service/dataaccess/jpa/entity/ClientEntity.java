@@ -1,4 +1,4 @@
-package org.vosiievska.bicycle.service.dataaccess.entity;
+package org.vosiievska.bicycle.service.dataaccess.jpa.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

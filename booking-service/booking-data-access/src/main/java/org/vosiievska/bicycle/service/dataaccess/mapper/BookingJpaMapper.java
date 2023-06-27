@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
-import org.vosiievska.bicycle.service.dataaccess.entity.BookingEntity;
+import org.vosiievska.bicycle.service.dataaccess.jpa.entity.BookingEntity;
 import org.vosiievska.bicycle.service.dataaccess.interfaces.BookingStatusInterface;
 import org.vosiievska.bicycle.service.domain.core.entity.Booking;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
@@ -57,9 +57,4 @@ public abstract class BookingJpaMapper {
         .failureMessages(Arrays.asList(statusInterface.getFailureMessages().split(FAILURE_MESSAGES_SEPARATOR)))
         .build();
   }
-
-//  @AfterMapping
-//  void jpaEntityToBooking(@MappingTarget Booking booking, BookingEntity bookingEntity) {
-//    booking.setId(new BookingId(bookingEntity.getId()));
-//  }
 }

@@ -21,6 +21,7 @@ ext {
 
 dependencies {
     implementation project(':common:common-domain')
+    implementation project(':common:common-data-access')
     implementation project(':booking-service:booking-domain:booking-app-service')
     implementation project(':booking-service:booking-domain:booking-domain-core')
 

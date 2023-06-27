@@ -2,7 +2,7 @@ package org.vosiievska.bicycle.service.dataaccess.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.vosiievska.bicycle.service.dataaccess.entity.RepairServiceEntity;
+import org.vosiievska.bicycle.service.dataaccess.jpa.entity.RepairServiceEntity;
 import org.vosiievska.bicycle.service.domain.core.entity.RepairService;
 
 @Mapper(componentModel = "spring")

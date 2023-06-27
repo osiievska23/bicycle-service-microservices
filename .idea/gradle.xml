@@ -19,9 +19,18 @@
             <option value="$PROJECT_DIR$/booking-service/booking-domain/booking-domain-core" />
             <option value="$PROJECT_DIR$/booking-service/booking-messaging" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/common/common-data-access" />
             <option value="$PROJECT_DIR$/common/common-domain" />
             <option value="$PROJECT_DIR$/db-schema" />
             <option value="$PROJECT_DIR$/kafka" />
+            <option value="$PROJECT_DIR$/payment-service" />
+            <option value="$PROJECT_DIR$/payment-service/payment-container" />
+            <option value="$PROJECT_DIR$/payment-service/payment-data-access" />
+            <option value="$PROJECT_DIR$/payment-service/payment-domain" />
+            <option value="$PROJECT_DIR$/payment-service/payment-domain/payment-app-service" />
+            <option value="$PROJECT_DIR$/payment-service/payment-domain/payment-domain-core" />
+            <option value="$PROJECT_DIR$/payment-service/payment-domin" />
+            <option value="$PROJECT_DIR$/payment-service/payment-messaging" />
           </set>
         </option>
       </GradleProjectSettings>
