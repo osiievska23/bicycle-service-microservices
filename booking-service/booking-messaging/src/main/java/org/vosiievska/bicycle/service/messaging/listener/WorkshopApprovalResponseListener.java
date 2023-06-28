@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class RestaurantApprovalResponseListener implements KafkaConsumer<String, AvroWorkshopApprovalResponse> {
+public class WorkshopApprovalResponseListener implements KafkaConsumer<String, AvroWorkshopApprovalResponse> {
 
   BookingAvroMessagingMapper messagingMapper;
   WorkshopResponseListener workshopResponseListener;

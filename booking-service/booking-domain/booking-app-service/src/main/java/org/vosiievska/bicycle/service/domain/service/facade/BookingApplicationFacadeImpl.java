@@ -25,7 +25,7 @@ import java.util.Set;
 public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
 
   private final BookingApplicationService bookingApplicationService;
-  private final Set<DomainEventPublisher<BookingEvent>> domainEventPublisher;
+  private final Set<DomainEventPublisher<? extends BookingEvent>> domainEventPublisher;
   private final BookingMapper bookingMapper;
 
   @Override
@@ -49,9 +49,11 @@ public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
     return bookingApplicationService.getBookingStatus(bookingId);
   }
 
+  @SuppressWarnings("unchecked")
   private void publishBookingEvent(BookingEvent event) {
     domainEventPublisher.stream()
-        .filter(publisher -> publisher.supports(event))
+        .map(p -> (DomainEventPublisher<BookingEvent>) p)
+        .filter(p -> p.supports(event))
         .findFirst()
         .orElseThrow(() -> new BookingEventPublisherException(
             "Booking domain event publisher supporting %s event not found", event.getClass().getSimpleName()))

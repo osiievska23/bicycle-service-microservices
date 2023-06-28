@@ -17,7 +17,7 @@ import java.util.Set;
 public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageListener {
 
   private final PaymentApplicationService paymentApplicationService;
-  private final Set<DomainEventPublisher<PaymentEvent>> domainEventPublisher;
+  private final Set<DomainEventPublisher<? extends PaymentEvent>> domainEventPublisher;
 
   @Override
   public void completePayment(PaymentRequest paymentRequest) {
@@ -31,8 +31,10 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
     publishPaymentResponseEvent(paymentApplicationService.createCancelPayment(paymentRequest));
   }
 
+  @SuppressWarnings("unchecked")
   private void publishPaymentResponseEvent(PaymentEvent event) {
     domainEventPublisher.stream()
+        .map(publisher -> (DomainEventPublisher<PaymentEvent>) publisher)
         .filter(publisher -> publisher.supports(event))
         .findFirst()
         .orElseThrow(() -> new PaymentApplicationServiceException(
