@@ -10,7 +10,7 @@ import org.vosiievska.bicycle.service.kafka.producer.KafkaProducer;
 
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractDomainEventPublisher<E extends AbstractDomainEvent<?>> implements DomainEventPublisher<E> {
+public abstract class AbstractBookingEventPublisher<E extends AbstractDomainEvent<?>> implements DomainEventPublisher<E> {
 
   private final KafkaProducer kafkaProducer;
 

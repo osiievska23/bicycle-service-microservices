@@ -9,6 +9,8 @@ public interface PaymentResponseListener {
 
   void paidSuccessfully(PaymentResponse paymentResponse);
 
+  void paymentCancelled(PaymentResponse paymentResponse);
+
   void paymentFailed(PaymentResponse paymentResponse);
 
 }

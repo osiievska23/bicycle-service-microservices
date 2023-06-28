@@ -12,7 +12,7 @@ import org.vosiievska.bicycle.service.messaging.mapper.BookingAvroMessagingMappe
 
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class BookingCreatedEventPublisher extends AbstractDomainEventPublisher<BookingCreatedEvent> {
+public class BookingCreatedEventPublisher extends AbstractBookingEventPublisher<BookingCreatedEvent> {
 
   BookingAvroMessagingMapper messagingMapper;
   BookingServiceConfigurationData configurationData;

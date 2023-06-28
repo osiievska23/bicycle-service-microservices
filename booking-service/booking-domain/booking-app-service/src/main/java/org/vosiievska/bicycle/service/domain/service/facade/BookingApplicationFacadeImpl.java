@@ -4,19 +4,23 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.vosiievska.bicycle.service.domain.core.entity.Booking;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCanceledEvent;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCreatedEvent;
 import org.vosiievska.bicycle.service.domain.core.event.BookingEvent;
+import org.vosiievska.bicycle.service.domain.core.event.BookingPaidEvent;
 import org.vosiievska.bicycle.service.domain.event.DomainEventPublisher;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.request.DeclineBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
+import org.vosiievska.bicycle.service.domain.service.dto.response.PaymentResponse;
 import org.vosiievska.bicycle.service.domain.service.exception.BookingEventPublisherException;
 import org.vosiievska.bicycle.service.domain.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.domain.service.service.BookingApplicationService;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -47,6 +51,13 @@ public class BookingApplicationFacadeImpl implements BookingApplicationFacade {
   @Override
   public BookingStatusResponse getBookingStatusById(BookingId bookingId) {
     return bookingApplicationService.getBookingStatus(bookingId);
+  }
+
+  @Override
+  public void approveBookingByWorkshop(PaymentResponse paymentResponse) {
+    BookingId bookingId = new BookingId(UUID.fromString(paymentResponse.getBookingId()));
+    Booking booking = bookingApplicationService.getBookingById(bookingId);
+    publishBookingEvent(new BookingPaidEvent(booking));
   }
 
   @SuppressWarnings("unchecked")

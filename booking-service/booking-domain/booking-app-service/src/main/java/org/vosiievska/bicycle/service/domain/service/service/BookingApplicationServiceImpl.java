@@ -16,7 +16,6 @@ import org.vosiievska.bicycle.service.domain.exception.EntityNotFoundException;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.request.DeclineBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
-import org.vosiievska.bicycle.service.domain.service.mapper.AddressMapper;
 import org.vosiievska.bicycle.service.domain.service.mapper.BookingMapper;
 import org.vosiievska.bicycle.service.domain.service.repository.BookingRepository;
 import org.vosiievska.bicycle.service.domain.service.repository.ClientRepository;
@@ -41,7 +40,6 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   private final WorkshopRepository workshopRepository;
   private final RepairServiceRepository repairServiceRepository;
   private final BookingMapper bookingMapper;
-  private final AddressMapper addressMapper;
 
   @Override
   public BookingCreatedEvent createBooking(CreateBookingRequest request) {
@@ -77,9 +75,17 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
 
   @Override
   public BookingStatusResponse getBookingStatus(BookingId bookingId) {
-    log.info("Get booking status by id: {}", bookingId);
+    log.info("Get booking status by id: {}", bookingId.getValue());
     return bookingRepository.findBookingStatusById(bookingId)
         .orElseThrow(() -> new EntityNotFoundException("Booking status by id: %s not found", bookingId));
+  }
+
+  @Override
+  public Booking getBookingById(BookingId bookingId) {
+    log.info("Get booking by id: {}", bookingId.getValue());
+    return bookingRepository.findById(bookingId)
+        .orElseThrow(() -> new EntityNotFoundException("Booking by id: %s not found", bookingId));
+
   }
 
   private Workshop getAvailableWorkshop() {
@@ -101,15 +107,5 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   private RepairService getRepairServiceById(String repairServiceId) {
     return repairServiceRepository.findById(new RepairServiceId(repairServiceId))
         .orElseThrow(() -> new EntityNotFoundException("Repair service by id '%s' not found", repairServiceId));
-  }
-
-  private Client findClientById(UUID clientId) {
-    return clientRepository.findById(new ClientId(clientId))
-        .orElseThrow(() -> new EntityNotFoundException("Client by id: %s not found", clientId));
-  }
-
-  private Booking findBookingById(UUID bookingId) {
-    return bookingRepository.findById(new BookingId(bookingId))
-        .orElseThrow(() -> new EntityNotFoundException("Booking by id: %s not found", bookingId));
   }
 }

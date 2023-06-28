@@ -1,5 +1,6 @@
 package org.vosiievska.bicycle.service.domain.service.service;
 
+import org.vosiievska.bicycle.service.domain.core.entity.Booking;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCanceledEvent;
 import org.vosiievska.bicycle.service.domain.core.event.BookingCreatedEvent;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
@@ -14,4 +15,6 @@ public interface BookingApplicationService {
   BookingCanceledEvent cancelBooking(DeclineBookingRequest request);
 
   BookingStatusResponse getBookingStatus(BookingId bookingId);
+
+  Booking getBookingById(BookingId bookingId);
 }

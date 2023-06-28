@@ -3,6 +3,7 @@ package org.vosiievska.bicycle.service.domain.service.facade;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.request.DeclineBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
+import org.vosiievska.bicycle.service.domain.service.dto.response.PaymentResponse;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 
 public interface BookingApplicationFacade {
@@ -13,4 +14,5 @@ public interface BookingApplicationFacade {
 
   BookingStatusResponse getBookingStatusById(BookingId bookingId);
 
+  void approveBookingByWorkshop(PaymentResponse paymentResponse);
 }

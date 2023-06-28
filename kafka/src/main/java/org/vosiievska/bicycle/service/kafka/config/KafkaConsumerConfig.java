@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG;
-import static org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG;
 
@@ -43,7 +42,6 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
     Map<String, Object> configurations = new HashMap<>();
 
     configurations.put(BOOTSTRAP_SERVERS_CONFIG, kafkaGlobalConfig.getBootstrapServersConfig());
-    configurations.put(GROUP_ID_CONFIG, "payment-consumer-group-id");
     configurations.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, kafkaGlobalConfig.getSchemaRegistryUrl());
     configurations.put(KafkaAvroDeserializerConfig.AUTO_REGISTER_SCHEMAS, true);
     configurations.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);

@@ -31,6 +31,13 @@
             <option value="$PROJECT_DIR$/payment-service/payment-domain/payment-domain-core" />
             <option value="$PROJECT_DIR$/payment-service/payment-domin" />
             <option value="$PROJECT_DIR$/payment-service/payment-messaging" />
+            <option value="$PROJECT_DIR$/workshop-service" />
+            <option value="$PROJECT_DIR$/workshop-service/workshop-container" />
+            <option value="$PROJECT_DIR$/workshop-service/workshop-data-access" />
+            <option value="$PROJECT_DIR$/workshop-service/workshop-domain" />
+            <option value="$PROJECT_DIR$/workshop-service/workshop-domain/workshop-app-service" />
+            <option value="$PROJECT_DIR$/workshop-service/workshop-domain/workshop-domain-core" />
+            <option value="$PROJECT_DIR$/workshop-service/workshop-messaging" />
           </set>
         </option>
       </GradleProjectSettings>

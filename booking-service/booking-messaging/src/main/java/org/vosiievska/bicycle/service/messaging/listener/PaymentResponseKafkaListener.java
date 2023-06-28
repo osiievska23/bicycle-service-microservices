@@ -45,7 +45,8 @@ public class PaymentResponseKafkaListener implements KafkaConsumer<String, AvroP
   private void proceedPaymentResponse(PaymentResponse paymentResponse) {
     switch (paymentResponse.getPaymentStatus()) {
       case COMPLETED -> paymentResponseListener.paidSuccessfully(paymentResponse);
-      case CANCELLED -> paymentResponseListener.paymentFailed(paymentResponse);
+      case CANCELLED -> paymentResponseListener.paymentCancelled(paymentResponse);
+      case FAILED -> paymentResponseListener.paymentFailed(paymentResponse);
       default -> throw new BookingListenerException("Invalid payment response status");
     }
   }
