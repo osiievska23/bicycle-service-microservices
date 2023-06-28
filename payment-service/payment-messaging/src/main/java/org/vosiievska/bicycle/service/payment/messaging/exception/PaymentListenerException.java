@@ -1,4 +1,4 @@
-package org.vosiievska.payment.service.messaging.exception;
+package org.vosiievska.bicycle.service.payment.messaging.exception;
 
 import org.vosiievska.bicycle.service.domain.exception.DomainException;
 

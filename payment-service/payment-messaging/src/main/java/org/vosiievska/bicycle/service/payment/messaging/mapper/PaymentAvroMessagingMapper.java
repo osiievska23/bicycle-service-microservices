@@ -1,4 +1,4 @@
-package org.vosiievska.payment.service.messaging.mapper;
+package org.vosiievska.bicycle.service.payment.messaging.mapper;
 
 import com.bicycle.service.avro.payment.AvroPaymentRequest;
 import com.bicycle.service.avro.payment.AvroPaymentResponse;

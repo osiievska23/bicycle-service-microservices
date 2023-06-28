@@ -1,4 +1,4 @@
-package org.vosiievska.payment.service.messaging.publisher;
+package org.vosiievska.bicycle.service.payment.messaging.publisher;
 
 import com.bicycle.service.avro.payment.AvroPaymentResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.vosiievska.bicycle.service.payment.domain.event.PaymentCompleteEvent;
 import org.vosiievska.bicycle.service.payment.domain.event.PaymentEvent;
 import org.vosiievska.bicycle.service.payment.domain.event.PaymentFailedEvent;
 import org.vosiievska.bicycle.service.payment.domain.service.config.PaymentServiceConfigurationData;
-import org.vosiievska.payment.service.messaging.mapper.PaymentAvroMessagingMapper;
+import org.vosiievska.bicycle.service.payment.messaging.mapper.PaymentAvroMessagingMapper;
 
 import java.util.Set;
 

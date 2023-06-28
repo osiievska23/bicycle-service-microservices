@@ -1,4 +1,4 @@
-package org.vosiievska.payment.service.messaging.listener;
+package org.vosiievska.bicycle.service.payment.messaging.listener;
 
 import com.bicycle.service.avro.payment.AvroPaymentRequest;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.kafka.consumer.KafkaConsumer;
 import org.vosiievska.bicycle.service.payment.domain.service.dto.PaymentRequest;
 import org.vosiievska.bicycle.service.payment.domain.service.listener.PaymentRequestMessageListener;
-import org.vosiievska.payment.service.messaging.exception.PaymentListenerException;
-import org.vosiievska.payment.service.messaging.mapper.PaymentAvroMessagingMapper;
+import org.vosiievska.bicycle.service.payment.messaging.exception.PaymentListenerException;
+import org.vosiievska.bicycle.service.payment.messaging.mapper.PaymentAvroMessagingMapper;
 
 import java.util.List;
 
