@@ -20,7 +20,6 @@ public interface WorkshopApprovalResponseMapper {
 
   @Mapping(target = "id", expression = "java(new BookingApprovalId(request.getId()))")
   @Mapping(target = "bookingId", expression = "java(new BookingId(request.getBookingId()))")
-  @Mapping(target = "clientId", expression = "java(new ClientId(request.getClientId()))")
   @Mapping(target = "repairServiceId", expression = "java(new RepairServiceId(request.getRepairServiceId()))")
   WorkshopApprovalResponse workshopApprovalRequestToWorkshop(WorkshopApprovalRequest request);
 }

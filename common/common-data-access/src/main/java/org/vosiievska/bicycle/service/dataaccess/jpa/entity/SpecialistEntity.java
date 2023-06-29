@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "specialist", schema = "service")
 @Getter
@@ -27,7 +29,7 @@ public class SpecialistEntity extends BaseUserEntity {
   WorkshopEntity workshop;
 
   @Column(name = "workshop_id", insertable = false, updatable = false)
-  Integer workshopId;
+  UUID workshopId;
 
   @Column(name = "busy", nullable = false)
   boolean busy;

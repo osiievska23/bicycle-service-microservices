@@ -23,7 +23,8 @@ public abstract class WorkshopAvroMessagingMapper {
       List<AvroWorkshopApprovalRequest> requests);
 
   @Mapping(target = "id", expression = "java(UUID.randomUUID().toString())")
-  @Mapping(target = "workshopId", source = "event.domain.workshop.id.value")
+  @Mapping(target = "workshopId", expression = "java(getWorkshopId(event))")
+  @Mapping(target = "specialistId", expression = "java(getSpecialistId(event))")
   @Mapping(target = "bookingId", source = "event.domain.bookingId.value")
   @Mapping(target = "repairServiceId", source = "event.domain.repairServiceId.value")
   @Mapping(target = "workshopResponseStatus",
@@ -31,4 +32,11 @@ public abstract class WorkshopAvroMessagingMapper {
   public abstract AvroWorkshopApprovalResponse workshopApprovalEventToAvroWorkshopResponse(
       WorkshopApprovalResponseEvent event);
 
+  protected String getWorkshopId(WorkshopApprovalResponseEvent event) {
+    return event.getDomain().getWorkshop() != null ? event.getDomain().getWorkshop().getIdValue().toString() : null;
+  }
+
+  protected String getSpecialistId(WorkshopApprovalResponseEvent e) {
+    return e.getDomain().getSpecialistId() != null ? e.getDomain().getSpecialistId().getValue().toString() : null;
+  }
 }

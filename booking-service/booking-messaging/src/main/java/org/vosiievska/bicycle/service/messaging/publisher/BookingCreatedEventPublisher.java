@@ -32,11 +32,11 @@ public class BookingCreatedEventPublisher extends AbstractBookingEventPublisher<
 
   @Override
   public String getTopicName() {
-    return configurationData.getPaymentRequestTopicName();
+    return configurationData.getWorkshopApprovalRequestTopicName();
   }
 
   @Override
   public SpecificRecordBase getRequestMessage(BookingCreatedEvent event) {
-    return messagingMapper.bookingEventToAvroPaymentRequest(event);
+    return messagingMapper.bookingEventToAvroWorkshopApprovalRequest(event);
   }
 }

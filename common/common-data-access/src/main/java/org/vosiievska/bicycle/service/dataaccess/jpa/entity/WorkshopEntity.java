@@ -16,6 +16,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "workshop", schema = "service")
@@ -28,7 +29,7 @@ public class WorkshopEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Integer id;
+  UUID id;
 
   @OneToMany(mappedBy = "workshop", cascade = CascadeType.ALL, orphanRemoval = true)
   Set<SpecialistEntity> specialists;

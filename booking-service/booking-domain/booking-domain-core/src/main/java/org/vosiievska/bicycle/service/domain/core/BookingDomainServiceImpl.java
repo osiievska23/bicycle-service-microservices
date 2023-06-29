@@ -17,8 +17,7 @@ import java.util.List;
 public class BookingDomainServiceImpl implements BookingDomainService {
 
   @Override
-  public Booking validateAndInitiateBooking(Booking booking, Workshop workshop) {
-    workshop.validateWorkshop();
+  public Booking validateAndInitiateBooking(Booking booking) {
     booking.initBooking();
     booking.validateBooking();
     log.info("New booking with id '{}' initialized", booking.getId().getValue().toString());

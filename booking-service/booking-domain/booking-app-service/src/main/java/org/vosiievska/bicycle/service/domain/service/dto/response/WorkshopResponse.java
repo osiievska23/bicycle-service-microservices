@@ -8,6 +8,7 @@ import org.vosiievska.bicycle.service.domain.valueobject.WorkshopResponseStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -16,8 +17,9 @@ public class WorkshopResponse {
 
   String id;
   String sagaId;
-  String workshopId;
-  String bookingId;
+  UUID bookingId;
+  UUID workshopId;
+  UUID specialistId;
   String repairServiceId;
   WorkshopResponseStatus workshopResponseStatus;
   LocalDateTime createdAt;

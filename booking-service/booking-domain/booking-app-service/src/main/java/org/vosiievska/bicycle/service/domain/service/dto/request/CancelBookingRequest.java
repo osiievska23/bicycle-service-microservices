@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class DeclineBookingRequest {
+public class CancelBookingRequest {
 
   @NotNull
   UUID bookingId;

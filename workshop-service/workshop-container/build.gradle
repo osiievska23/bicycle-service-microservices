@@ -13,6 +13,7 @@ dependencies {
     implementation project(':workshop-service:workshop-domain:workshop-app-service')
     implementation project(':workshop-service:workshop-domain:workshop-domain-core')
     implementation project(':workshop-service:workshop-messaging')
+    implementation project(':workshop-service:workshop-data-access')
 
     implementation "org.postgresql:postgresql:${postgresqlVersion}"
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"

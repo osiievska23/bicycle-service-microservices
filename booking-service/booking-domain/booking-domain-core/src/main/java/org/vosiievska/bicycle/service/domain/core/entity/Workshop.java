@@ -9,6 +9,7 @@ import org.vosiievska.bicycle.service.domain.entity.AggregateRoot;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Workshop extends AggregateRoot<WorkshopId> {
   final Set<Specialist> specialists;
   final boolean available;
 
-  public Integer getIdValue() {
+  public UUID getIdValue() {
     return getId().getValue();
   }
 

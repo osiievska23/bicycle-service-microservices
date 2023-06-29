@@ -52,7 +52,7 @@ public class BookingEntity {
   WorkshopEntity workshop;
 
   @Column(name = "workshop_id", nullable = false)
-  Integer workshopId;
+  UUID workshopId;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "specialist_id", referencedColumnName = "id", insertable = false,

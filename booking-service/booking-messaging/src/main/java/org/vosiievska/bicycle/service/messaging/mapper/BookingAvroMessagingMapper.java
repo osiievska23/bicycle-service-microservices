@@ -30,7 +30,6 @@ public interface BookingAvroMessagingMapper {
   AvroPaymentRequest bookingEventToAvroPaymentRequest(BookingEvent event);
 
   @Mapping(target = "id", expression = "java(UUID.randomUUID().toString())")
-  @Mapping(target = "workshopId", source = "event.booking.workshopId.value")
   @Mapping(target = "bookingId", source = "event.booking.id.value")
   @Mapping(target = "repairServiceId", source = "event.booking.repairService.title")
   @Mapping(target = "bookingStatus",

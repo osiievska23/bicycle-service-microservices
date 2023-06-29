@@ -3,6 +3,7 @@ package org.vosiievska.bicycle.service.workshop.messaging.publisher;
 import com.bicycle.service.avro.payment.AvroWorkshopApprovalResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.domain.event.DomainEvent;
 import org.vosiievska.bicycle.service.domain.event.DomainEventPublisher;
 import org.vosiievska.bicycle.service.kafka.producer.KafkaProducer;
@@ -15,8 +16,9 @@ import org.vosiievska.bicycle.service.workshop.messaging.mapper.WorkshopAvroMess
 import java.util.Set;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
-public abstract class AbstractWorkshopMessagePublisher<E extends WorkshopApprovalResponseEvent> implements DomainEventPublisher<E> {
+public class WorkshopMessagePublisher<E extends WorkshopApprovalResponseEvent> implements DomainEventPublisher<E> {
 
   private final Set<Class<?>> SUPPORTED_WORKSHOP_EVENT_CLASSES = Set.of(
       BookingApprovedEvent.class, BookingDeclinedEvent.class);

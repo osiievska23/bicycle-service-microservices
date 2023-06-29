@@ -8,5 +8,4 @@ public interface PaymentDomainService {
 
   Payment validateAndInitiatePayment(Payment payment, List<String> failureMessages);
 
-  Payment validateAndCancelPayment(Payment payment, List<String> failureMessages);
 }

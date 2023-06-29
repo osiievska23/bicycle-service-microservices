@@ -9,9 +9,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.kafka.consumer.KafkaConsumer;
-import org.vosiievska.bicycle.service.payment.domain.service.dto.PaymentRequest;
 import org.vosiievska.bicycle.service.payment.domain.service.listener.PaymentRequestMessageListener;
-import org.vosiievska.bicycle.service.payment.messaging.exception.PaymentListenerException;
 import org.vosiievska.bicycle.service.payment.messaging.mapper.PaymentAvroMessagingMapper;
 
 import java.util.List;
@@ -35,14 +33,7 @@ public class PaymentRequestKafkaListener implements KafkaConsumer<String, AvroPa
     log.info("Received {} payment request messages with keys: {}, partitions: {} and offsets: {}",
         messages.size(), keys.toString(), partitions.toString(), offsets.toString());
 
-    messagingMapper.avroPaymentRequestToPaymentRequest(messages).forEach(this::proceedPaymentRequest);
-  }
-
-  private void proceedPaymentRequest(PaymentRequest paymentRequest) {
-    switch (paymentRequest.getBookingStatus()) {
-      case PENDING -> paymentRequestMessageListener.completePayment(paymentRequest);
-      case CANCELLED -> paymentRequestMessageListener.cancelPayment(paymentRequest);
-      default -> throw new PaymentListenerException("Invalid payment request booking status");
-    }
+    messagingMapper.avroPaymentRequestToPaymentRequest(messages)
+        .forEach(paymentRequestMessageListener::completePayment);
   }
 }

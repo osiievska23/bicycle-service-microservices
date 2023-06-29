@@ -20,9 +20,7 @@ public class WorkshopApprovalRequest {
 
   UUID id;
   UUID sagaId;
-  UUID workshopId;
   UUID bookingId;
-  UUID clientId;
   String repairServiceId;
   LocalDateTime createdAt;
   BookingStatus bookingStatus;

@@ -9,7 +9,9 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.kafka.consumer.KafkaConsumer;
+import org.vosiievska.bicycle.service.workshop.dto.WorkshopApprovalRequest;
 import org.vosiievska.bicycle.service.workshop.listener.WorkshopApprovalRequestMessageListener;
+import org.vosiievska.bicycle.service.workshop.messaging.exception.WorkshopListenerException;
 import org.vosiievska.bicycle.service.workshop.messaging.mapper.WorkshopAvroMessagingMapper;
 
 import java.util.List;
@@ -34,6 +36,14 @@ public class WorkshopApprovalRequestListener implements KafkaConsumer<String, Av
         messages.size(), keys.toString(), partitions.toString(), offsets.toString());
 
     messagingMapper.avroWorkshopApprovalRequestToRequestList(messages)
-        .forEach(approvalRequestMessageListener::approveBooking);
+        .forEach(this::proceedPaymentRequest);
+  }
+
+  private void proceedPaymentRequest(WorkshopApprovalRequest request) {
+    switch (request.getBookingStatus()) {
+      case PENDING -> approvalRequestMessageListener.approveBooking(request);
+      case CANCELLING -> approvalRequestMessageListener.cancelBooking(request);
+      default -> throw new WorkshopListenerException("Invalid workshop approval request booking status");
+    }
   }
 }

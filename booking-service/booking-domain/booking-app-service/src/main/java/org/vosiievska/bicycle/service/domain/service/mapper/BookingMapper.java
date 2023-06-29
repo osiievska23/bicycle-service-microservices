@@ -32,6 +32,12 @@ public interface BookingMapper {
   @Mapping(target = "clientAddress", source = "client.address")
   Booking createBookingRequestToEntity(Client client, Workshop workshop, RepairService repairService);
 
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "clientId", expression = "java(new ClientId(client.getIdValue()))")
+  @Mapping(target = "repairService", source = "repairService")
+  @Mapping(target = "clientAddress", source = "client.address")
+  Booking createBookingRequestToEntity(Client client, RepairService repairService);
+
   BookingStatusResponse bookingToBookingStatusResponse(Booking booking);
 
   default SpecialistId getAvailableSpecialist(Set<Specialist> specialists) {

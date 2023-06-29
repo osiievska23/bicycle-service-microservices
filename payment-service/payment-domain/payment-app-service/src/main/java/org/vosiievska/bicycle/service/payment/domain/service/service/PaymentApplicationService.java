@@ -7,6 +7,5 @@ public interface PaymentApplicationService {
 
   PaymentEvent createCompletedPayment(PaymentRequest paymentRequest);
 
-  PaymentEvent createCancelPayment(PaymentRequest paymentRequest);
 
 }

@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vosiievska.bicycle.service.domain.service.dto.request.CreateBookingRequest;
-import org.vosiievska.bicycle.service.domain.service.dto.request.DeclineBookingRequest;
+import org.vosiievska.bicycle.service.domain.service.dto.request.CancelBookingRequest;
 import org.vosiievska.bicycle.service.domain.service.dto.response.BookingStatusResponse;
 import org.vosiievska.bicycle.service.domain.service.facade.BookingApplicationFacade;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
@@ -36,10 +37,10 @@ public class BookingController {
   }
 
   @PutMapping("/{bookingId}")
-  public ResponseEntity<BookingStatusResponse> cancelBooking(@NotNull @PathVariable UUID bookingId) {
-    UUID customerId = UUID.randomUUID(); // todo: get client ID from session
-    log.info("Rest request to cancel booking with id: {} by client id: {}", bookingId, customerId);
-    return ResponseEntity.ok(applicationFacade.cancelBooking(new DeclineBookingRequest(bookingId, customerId)));
+  public ResponseEntity<BookingStatusResponse> cancelBooking(@NotNull @PathVariable UUID bookingId,
+                                                             @RequestParam UUID clientId) {// todo: get client ID from session
+    log.info("Rest request to cancel booking with id: {} by client id: {}", bookingId, clientId);
+    return ResponseEntity.ok(applicationFacade.cancelBooking(new CancelBookingRequest(bookingId, clientId)));
   }
 
   @GetMapping("/{bookingId}")

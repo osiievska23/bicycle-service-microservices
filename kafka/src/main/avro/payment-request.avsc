@@ -45,7 +45,7 @@
             "type": {
                 "type": "enum",
                 "name": "BookingStatus",
-                "symbols": ["PENDING", "CANCELLED", "PAID"]
+                "symbols": ["PENDING", "APPROVED", "DECLINED", "PAID", "PAYMENT_FAILED", "CANCELLING", "CANCELLED"]
             }
         }
     ]

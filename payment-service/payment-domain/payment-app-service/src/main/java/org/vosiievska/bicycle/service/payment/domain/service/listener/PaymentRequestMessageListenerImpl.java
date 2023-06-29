@@ -25,12 +25,6 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
     publishPaymentResponseEvent(paymentApplicationService.createCompletedPayment(paymentRequest));
   }
 
-  @Override
-  public void cancelPayment(PaymentRequest paymentRequest) {
-    log.info("Payment cancelling for booking with id: {}", paymentRequest.getBookingId());
-    publishPaymentResponseEvent(paymentApplicationService.createCancelPayment(paymentRequest));
-  }
-
   @SuppressWarnings("unchecked")
   private void publishPaymentResponseEvent(PaymentEvent event) {
     domainEventPublisher.stream()

@@ -27,14 +27,14 @@ create table if not exists service.client (
 ) inherits(service."user");
 
 create table if not exists service.workshop (
-    id              serial    	not null,
-    available       boolean     not null default true,
+    id              uuid    	not null    default uuid_generate_v4(),
+    available       boolean     not null    default true,
     constraint workshop_id_pk primary key (id)
 );
 
 create table if not exists service.specialist (
-    workshop_id     int      	not null,
-    busy            boolean     not null default false,
+    workshop_id     uuid      	not null,
+    busy            boolean     not null    default false,
 
 	constraint specialist_id_pk primary key (id),
     constraint fk_specialist_workshop foreign key (workshop_id) references service.workshop(id)
@@ -49,8 +49,8 @@ create table if not exists service.repair_service (
 create table if not exists service.booking (
     id              uuid        not null    default uuid_generate_v4(),
     client_id       uuid        not null,
-    workshop_id     int         not null,
-    specialist_id   uuid        not null,
+    workshop_id     uuid,
+    specialist_id   uuid,
     address_id      uuid        not null,
     repair_service_title    varchar(100)    not null,
     current_status          varchar(45)     not null,

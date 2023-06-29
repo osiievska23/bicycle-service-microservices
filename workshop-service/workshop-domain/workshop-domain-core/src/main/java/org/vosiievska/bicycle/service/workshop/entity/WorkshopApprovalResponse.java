@@ -7,8 +7,8 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.entity.BaseEntity;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
-import org.vosiievska.bicycle.service.domain.valueobject.ClientId;
 import org.vosiievska.bicycle.service.domain.valueobject.RepairServiceId;
+import org.vosiievska.bicycle.service.domain.valueobject.SpecialistId;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopResponseStatus;
 import org.vosiievska.bicycle.service.workshop.valueobject.BookingApprovalId;
 
@@ -22,11 +22,11 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WorkshopApprovalResponse extends BaseEntity<BookingApprovalId> {
 
-  final Workshop workshop;
   final BookingId bookingId;
-  final ClientId clientId;
   final RepairServiceId repairServiceId;
 
+  Workshop workshop;
+  SpecialistId specialistId;
   LocalDateTime createdAt;
   WorkshopResponseStatus approvalStatus;
 

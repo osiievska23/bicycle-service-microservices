@@ -1,7 +1,9 @@
 package org.vosiievska.bicycle.service.domain.valueobject;
 
-public class WorkshopId extends BaseId<Integer> {
-  public WorkshopId(Integer departmentNumber) {
+import java.util.UUID;
+
+public class WorkshopId extends BaseId<UUID> {
+  public WorkshopId(UUID departmentNumber) {
     super(departmentNumber);
   }
 }

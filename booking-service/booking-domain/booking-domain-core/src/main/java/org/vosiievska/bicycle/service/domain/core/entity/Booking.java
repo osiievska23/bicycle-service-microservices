@@ -29,10 +29,12 @@ import static org.vosiievska.bicycle.service.domain.valueobject.BookingStatus.PE
 public class Booking extends AggregateRoot<BookingId> {
 
   final ClientId clientId;
-  final WorkshopId workshopId;
-  final SpecialistId specialistId;
   final RepairService repairService;
   final Address clientAddress;
+
+  WorkshopId workshopId;
+  SpecialistId specialistId;
+
   BookingStatus currentStatus;
   Instant updatedAt;
   List<String> failureMessages;

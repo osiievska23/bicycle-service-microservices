@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.vosiievska.bicycle.service.domain.event.DomainEventPublisher;
+import org.vosiievska.bicycle.service.domain.valueobject.BookingId;
 import org.vosiievska.bicycle.service.workshop.WorkshopApplicationService;
 import org.vosiievska.bicycle.service.workshop.dto.WorkshopApprovalRequest;
 import org.vosiievska.bicycle.service.workshop.event.WorkshopApprovalResponseEvent;
@@ -22,7 +23,13 @@ public class WorkshopApprovalRequestMessageListenerImpl implements WorkshopAppro
   @Override
   public void approveBooking(WorkshopApprovalRequest request) {
     log.info("Workshop approval processing for booking with id: {}", request.getBookingId());
-    publishResponseEvent(workshopApplicationService.createWorkshopApproval(request));
+    publishResponseEvent(workshopApplicationService.createBookingApprovedEvent(request));
+  }
+
+  @Override
+  public void cancelBooking(WorkshopApprovalRequest request) {
+    log.info("Workshop approval processing for booking with id: {}", request.getBookingId());
+    workshopApplicationService.updateWorkshopSpecialistStatus(new BookingId(request.getBookingId()));
   }
 
   @SuppressWarnings("unchecked")

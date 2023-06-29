@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface BookingDomainService {
 
-  Booking validateAndInitiateBooking(Booking booking, Workshop workshop);
+  Booking validateAndInitiateBooking(Booking booking);
 
   BookingApprovedEvent approveBooking(Booking booking, Workshop workshop);
 

@@ -3,6 +3,7 @@ package org.vosiievska.bicycle.service.payment.messaging.publisher;
 import com.bicycle.service.avro.payment.AvroPaymentResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.vosiievska.bicycle.service.domain.event.DomainEvent;
 import org.vosiievska.bicycle.service.domain.event.DomainEventPublisher;
 import org.vosiievska.bicycle.service.kafka.producer.KafkaProducer;
@@ -16,8 +17,9 @@ import org.vosiievska.bicycle.service.payment.messaging.mapper.PaymentAvroMessag
 import java.util.Set;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
-public abstract class AbstractPaymentEventPublisher<E extends PaymentEvent> implements DomainEventPublisher<E> {
+public class PaymentEventPublisher<E extends PaymentEvent> implements DomainEventPublisher<E> {
 
   private final Set<Class<?>> SUPPORTED_PAYMENT_EVENT_CLASSES = Set.of(
       PaymentCancelledEvent.class, PaymentCompleteEvent.class, PaymentFailedEvent.class);

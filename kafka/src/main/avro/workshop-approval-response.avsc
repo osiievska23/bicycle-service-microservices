@@ -12,10 +12,23 @@
     },
     {
       "name": "workshopId",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "logicalType": "uuid"
+        }
+      ]
+    },
+    {
+      "name": "specialistId",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "logicalType": "uuid"
+        }
+      ]
     },
     {
       "name": "bookingId",
