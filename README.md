@@ -1,24 +1,62 @@
 ## NOTHING BUT SOME NOTES YET
 
-The Bicycle Service API
+# The Bicycle Service API
+
+Bicycle service online is an alternative to the traditional bicycle workshop.
+We understand people live busy lives, it's not always convenient to drop off your bicycle at a workshop and schedule
+a time to collect it, addressing this primary concern we offer easy, convenient and reliable service just a click or
+phone call away!
 
 - [Overview](#Overview)
+- [Running the Application](#Running the Application)
 
 Overview
 =======================================================
-Bicycle online workshop is a service 
->Good architecture allows the software to be changed during its lifetime with as little, constant effort as possible (and correspondingly predictable costs for the client)." 
-According to Robert C. Martin’s book “Clean Architecture
+Bicycle online workshop is an application created to practice the skill of building a microservice architecture with a 
+combination of DDD. The approaches and methodology used in Hexagonal Architecture could be found here also.
+
+>Good architecture allows the software to be changed during its lifetime with as little, constant effort as possible." 
+"Clean Architecture" Robert C. Martin
+
+![architecture.png](readme/images/app.png)
+
+The Bicycle Service api is responsible for creating booking for the door step service by UI client. 
+Monitoring the booking status during repair service provision.
+
+There are three main modules that communicate with each other by sending events using Kafka.
+![messaging.png](readme/images/messaging.png)
+- `booking-service` component contains the REST api which could be called form the user interface. This module is
+implements a business logic about booking creation and monitoring booking status.
+- `workshop-serice` approves the booking by validating the business rules like workshop and specialists availability.
+- `payment-serive` component processes the booking payment
+
+Running the Application
+=======================================================
+1. Ensure variables the next environment variables have been set: DB_URL, DB_USERNAME, DB_PASS
+2. Start PostgreSQL db and run migrations. To do this go to the `db-schema` module and run `docker-compose up` command.
+Execute `./gradlew flywayMigrate` command to run migrations and create schema with required tables data.
+3. Create kafka message brokers and necessary topics simply running `docker-compoe up` command in `kafka` module. 
+4. Start `booking-service`, `workshop-service` and `payment-service` with  
+   `./gradlew bootRun` or using your IDE.
+
+   
+
+## DDD
+### Strategic phase
+[Bounded Context (BCs)](https://martinfowler.com/bliki/BoundedContext.html)
+
+In the strategic phase we identify the BCs and map them out in a context map.
+Context map detailing the BCs and their relationships:
 
 
-Domain entities implements critical business rules and are not the same with jpa entities. 
+### Entity
+
+Domain entities implements critical business rules and are not the same with jpa entities.
 Obviously domain entities are mutable, we can easily change entity state, client name etc.
 From the other hand, the greater part of domain entity must consist of immutable value objects instead of primitives.
-They must have a unique identifier, that does not match tot the jpa entity ID value. 
-Basically domain entity id should be a value object to keep it immutable. 
+They must have a unique identifier, that does not match tot the jpa entity ID value.
+Basically domain entity id should be a value object to keep it immutable.
 
-
-## ENTITY
 ### ID as value object
 
 According to the Eric Evans`s book "Domain-Driven Design. Tackling Complexity in the Heart of Software":
@@ -76,14 +114,6 @@ Domain Services (or just Services in DDD) is used to perform domain operations a
 - The interface is defined in terms of other elements of the domain model.
 - The operation is stateless.
 
-# booking-domain
-## booking-domain-core 
-only creates and return the event. Domain service should not now about how to fire the event,
-it's responsible for creating and returning the events after business logic complete
-
-## booking-app-service
-decides where and how run the events
-
 
 ## The differences between a domain service and an application services are subtle but critical:
 (http://gorodinski.com/blog/2012/04/14/services-in-domain-driven-design-ddd/)
@@ -93,20 +123,3 @@ decides where and how run the events
 - Domain service methods can have other domain elements as operands and return values whereas application services operate upon trivial operands such as identity values and primitive data structures.
 - Application services declare dependencies on infrastructural services required to execute domain logic.
 - Command handlers are a flavor of application services which focus on handling a single command typically in a CQRS architecture.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**_Happy cycling!_** 🚴
