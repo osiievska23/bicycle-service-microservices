@@ -76,7 +76,7 @@ public class BookingApplicationServiceImpl implements BookingApplicationService 
   public BookingStatusResponse getBookingStatus(BookingId bookingId) {
     log.info("Get booking status by id: {}", bookingId.getValue());
     return bookingRepository.findBookingStatusById(bookingId)
-        .orElseThrow(() -> new EntityNotFoundException("Booking status by id: %s not found", bookingId));
+        .orElse(new BookingStatusResponse("Booking status by id: %s not found", bookingId));
   }
 
   @Override

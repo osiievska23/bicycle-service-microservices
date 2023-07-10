@@ -47,9 +47,9 @@ public class WorkshopApplicationServiceImpl implements WorkshopApplicationServic
       return buildBookingDeclinedEvent(approvalResponse, failureMessages);
     }
     approvalResponse.setWorkshop(workshopOptional.get());
-    workshopDomainService.validateWorkshopApproval(approvalResponse, failureMessages);
+    approvalResponse = workshopDomainService.validateWorkshopApproval(approvalResponse);
 
-    if (!failureMessages.isEmpty()) {
+    if (!approvalResponse.getFailureMessages().isEmpty()) {
       return buildBookingDeclinedEvent(approvalResponse, failureMessages);
     }
     SpecialistId specialistId = getAvailableSpecialistId(approvalResponse);

@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.entity.AggregateRoot;
 import org.vosiievska.bicycle.service.domain.valueobject.WorkshopId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -19,24 +20,27 @@ public class Workshop extends AggregateRoot<WorkshopId> {
   final Set<Specialist> specialists;
   final boolean available;
 
+  List<String> failureMessages;
+
   public UUID getIdValue() {
     return getId().getValue();
   }
 
-  public void validateWorkshop(List<String> failureMessages) {
-    validateIsActive(failureMessages);
-    validateAvailableSpecialist(failureMessages);
+  public void validateWorkshop() {
+    this.failureMessages = new ArrayList<>();
+    validateIsActive();
+    validateAvailableSpecialist();
   }
 
-  private void validateIsActive(List<String> failureMessages) {
+  private void validateIsActive() {
     if (!available) {
-      failureMessages.add(String.format("Workshop with id '%s' is not available!", getIdValue()));
+      this.failureMessages.add(String.format("Workshop with id '%s' is not available!", getIdValue()));
     }
   }
 
-  private void validateAvailableSpecialist(List<String> failureMessages) {
+  private void validateAvailableSpecialist() {
     if (specialists.stream().allMatch(Specialist::isBusy)) {
-      failureMessages.add(String.format("Workshop with id '%s' does not have available specialists!", getIdValue()));
+      this.failureMessages.add(String.format("Workshop with id '%s' does not have available specialists!", getIdValue()));
     }
   }
 }

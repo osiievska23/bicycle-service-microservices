@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import org.vosiievska.bicycle.service.domain.valueobject.BookingStatus;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -26,4 +27,13 @@ public class BookingStatusResponse {
   @NotNull
   Instant updatedAt;
   List<String> failureMessages;
+
+  public BookingStatusResponse(String failureMessage) {
+    this.failureMessages = new ArrayList<>();
+    this.failureMessages.add(failureMessage);
+  }
+
+  public BookingStatusResponse(String failureMessage, Object... args) {
+    this(String.format(failureMessage, args));
+  }
 }

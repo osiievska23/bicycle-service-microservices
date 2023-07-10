@@ -1,4 +1,4 @@
-## NOTHING BUT SOME NOTES YET
+#### NOTHING BUT SOME NOTES YET
 
 # The Bicycle Service API
 
@@ -54,8 +54,10 @@ Context map detailing the BCs and their relationships:
 Domain entities implements critical business rules and are not the same with jpa entities.
 Obviously domain entities are mutable, we can easily change entity state, client name etc.
 From the other hand, the greater part of domain entity must consist of immutable value objects instead of primitives.
-They must have a unique identifier, that does not match tot the jpa entity ID value.
-Basically domain entity id should be a value object to keep it immutable.
+They must have a unique identifier of any type, which may be shared among bounded contexts.This identifier should not match to the jpa entity ID value. 
+
+Recommendation: try to avoid using primitives when implement the domain entity. It's better to use value objects and sub-entities 
+to support domain entity consistency.  Each context is allowed to have a private version of a given entity.
 
 ### ID as value object
 

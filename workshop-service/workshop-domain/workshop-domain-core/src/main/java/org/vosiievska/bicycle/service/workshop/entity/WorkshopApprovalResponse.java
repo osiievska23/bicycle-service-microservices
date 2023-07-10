@@ -13,8 +13,12 @@ import org.vosiievska.bicycle.service.domain.valueobject.WorkshopResponseStatus;
 import org.vosiievska.bicycle.service.workshop.valueobject.BookingApprovalId;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static org.vosiievska.bicycle.service.domain.valueobject.WorkshopResponseStatus.APPROVED;
+import static org.vosiievska.bicycle.service.domain.valueobject.WorkshopResponseStatus.DECLINED;
 
 @Getter
 @Setter
@@ -29,14 +33,21 @@ public class WorkshopApprovalResponse extends BaseEntity<BookingApprovalId> {
   SpecialistId specialistId;
   LocalDateTime createdAt;
   WorkshopResponseStatus approvalStatus;
+  List<String> failureMessages;
 
   public void initialize() {
     this.setId(new BookingApprovalId(UUID.randomUUID()));
     this.createdAt = LocalDateTime.now();
+    this.setFailureMessages(new ArrayList<>());
   }
 
 
-  public void validateWorkshopApproval(List<String> failureMessages) {
-    this.workshop.validateWorkshop(failureMessages);
+  public void validateWorkshopApproval() {
+    this.workshop.validateWorkshop();
+    this.failureMessages.addAll(this.workshop.getFailureMessages());
+  }
+
+  public void setApprovalStatus() {
+    this.approvalStatus = this.failureMessages.isEmpty() ? APPROVED : DECLINED;
   }
 }
